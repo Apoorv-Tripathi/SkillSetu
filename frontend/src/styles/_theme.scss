@@ -1,0 +1,2491 @@
+// ============================================================
+// SkillSetu — Warm Cream Dashboard Theme
+// Crextio-inspired: top nav, warm cards, gold accents
+// ============================================================
+
+// ============================================================
+// 1. BASE LAYOUT & MULTI-RADIAL YELLOW GRADIENT MESH
+// ============================================================
+body,
+.ss-app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(ellipse 75% 60% at 94% 12%, rgba(253, 234, 168, 0.40) 0%, rgba(252, 241, 206, 0.20) 45%, transparent 75%),
+    radial-gradient(ellipse 60% 50% at 88% 88%, rgba(250, 228, 165, 0.24) 0%, rgba(252, 243, 218, 0.10) 50%, transparent 75%),
+    radial-gradient(circle 35% at 5% 95%, rgba(252, 238, 195, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 40% 20%, rgba(254, 248, 230, 0.25) 0%, transparent 65%);
+  background-attachment: fixed;
+  color: $charcoal;
+}
+
+// ============================================================
+// 2. TOP NAVIGATION BAR
+// ============================================================
+.ss-topnav {
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.65rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  &__logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: $charcoal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $gold;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $charcoal;
+    letter-spacing: -0.02em;
+  }
+}
+
+// Outlined Brand Capsule Pill (Crextio style)
+.ss-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.38rem 1.15rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $charcoal;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all $transition-base;
+
+  &:hover {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.28);
+    color: $charcoal;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $gold;
+    box-shadow: 0 0 8px $gold-glow;
+  }
+}
+
+// Navigation pills (center)
+.ss-nav-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+
+  @media (max-width: 991.98px) {
+    display: none;
+  }
+}
+
+.ss-nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.44rem 1.05rem;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #6E6E73;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all $transition-base;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: $charcoal;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.is-active {
+    color: #FFFFFF !important;
+    background-color: $charcoal !important;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  }
+
+  .ss-nav-pill__icon {
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+  }
+
+  &.is-active .ss-nav-pill__icon {
+    opacity: 1;
+  }
+}
+
+// "More" dropdown
+.ss-nav-more {
+  position: relative;
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: $card-white;
+    border: 1px solid $warm-border;
+    border-radius: 14px;
+    padding: 0.5rem;
+    min-width: 220px;
+    box-shadow: $shadow-hover;
+    z-index: 200;
+    display: none;
+
+    &.is-open {
+      display: block;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: $charcoal;
+    text-decoration: none;
+    transition: background $transition-base;
+
+    &:hover {
+      background: rgba(45, 45, 45, 0.05);
+    }
+
+    &.is-active {
+      background: rgba(201, 162, 39, 0.1);
+      color: $gold;
+      font-weight: 600;
+    }
+  }
+}
+
+// Topbar right actions
+.ss-topnav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+// ============================================================
+// 3. SIDEBAR NAVIGATION (permanent on desktop, drawer on mobile)
+// ============================================================
+.ss-sidebar {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  z-index: 120;
+  transition: transform 300ms ease;
+
+  @media (max-width: 991.98px) {
+    width: 280px;
+    z-index: 200;
+    transform: translateX(-100%);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+
+    &.is-open {
+      transform: translateX(0);
+    }
+  }
+}
+
+.ss-sidebar__backdrop {
+  display: none;
+  @media (max-width: 991.98px) {
+    &.is-open {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(45, 45, 45, 0.3);
+      backdrop-filter: blur(3px);
+      z-index: 199;
+    }
+  }
+}
+
+.ss-sidebar__header {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid $warm-border;
+}
+
+.ss-sidebar__logo-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: $charcoal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $gold;
+  flex-shrink: 0;
+}
+
+.ss-sidebar__brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ss-sidebar__brand-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $charcoal;
+  line-height: 1.2;
+}
+
+.ss-sidebar__brand-subtitle {
+  font-size: 0.65rem;
+  color: $muted;
+  font-weight: 500;
+}
+
+.ss-sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ss-sidebar__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ss-sidebar__section-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $muted;
+  padding: 0 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.ss-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: $warm-gray;
+  text-decoration: none;
+  transition: all $transition-base;
+
+  &:hover {
+    background: rgba(45, 45, 45, 0.05);
+    color: $charcoal;
+  }
+
+  &.is-active {
+    background: $charcoal;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    opacity: 0.65;
+  }
+
+  &.is-active &__icon {
+    opacity: 1;
+  }
+}
+
+.ss-sidebar__footer {
+  padding: 0.75rem;
+  border-top: 1px solid $warm-border;
+}
+
+// ============================================================
+// 4. CONTENT AREA
+// ============================================================
+.ss-main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: 260px;
+  width: calc(100% - 260px);
+
+  @media (max-width: 991.98px) {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.ss-role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.32rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(247, 201, 62, 0.15);
+  border: 1px solid rgba(247, 201, 62, 0.35);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $charcoal;
+  letter-spacing: 0.01em;
+}
+
+.ss-content-area {
+  flex: 1;
+  padding: 1.75rem 2rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 767.98px) {
+    padding: 1rem;
+  }
+}
+
+// ============================================================
+// 5. SEARCH BOX
+// ============================================================
+.ss-search-box {
+  display: flex;
+  align-items: center;
+  background: $cream-bg;
+  border: 1px solid $warm-border;
+  border-radius: 50px;
+  padding: 0.35rem 0.85rem;
+  gap: 0.5rem;
+  min-width: 200px;
+  transition: border-color $transition-base;
+
+  &:focus-within {
+    border-color: $gold;
+  }
+}
+
+.ss-search-icon {
+  color: $muted;
+  display: flex;
+  align-items: center;
+}
+
+.ss-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.82rem;
+  color: $charcoal;
+  flex: 1;
+  min-width: 100px;
+
+  &::placeholder {
+    color: $muted;
+  }
+}
+
+.ss-search-key {
+  font-size: 0.65rem;
+  color: $muted;
+  background: $card-white;
+  border: 1px solid $warm-border;
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  font-family: $font-family-monospace;
+  white-space: nowrap;
+}
+
+// ============================================================
+// 6. USER PROFILE / AVATAR
+// ============================================================
+.ss-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $gold;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.ss-user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.ss-user-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.ss-user-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: $charcoal;
+}
+
+.ss-user-sub {
+  font-size: 0.68rem;
+  color: $muted;
+}
+
+// Icon buttons & Theme Toggle (Circular Glassmorphic Pills matching Crextio topbar)
+.ss-icon-btn,
+.ss-theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #FFFFFF;
+  color: $charcoal;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  outline: none;
+
+  &:hover {
+    background: #FAF8F5;
+    border-color: rgba(0, 0, 0, 0.14);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    color: $charcoal;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  svg {
+    transition: transform 300ms ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.08);
+  }
+}
+
+// ============================================================
+// 7. DASHBOARD HEADER
+// ============================================================
+.ss-dash-header {
+  margin-bottom: 1.25rem;
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $charcoal;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.15rem;
+
+    @media (max-width: 767.98px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__sub {
+    font-size: 0.88rem;
+    color: $muted;
+    margin: 0;
+  }
+}
+
+// ============================================================
+// 8. TIER 1 — HERO SUMMARY CARD
+// ============================================================
+.ss-tier1 {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-left: 4px solid $gold;
+  border-radius: 28px;
+  padding: 1.35rem 1.6rem;
+  margin-bottom: 1.5rem;
+  box-shadow: $shadow-card;
+
+  &__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $muted;
+    margin-bottom: 0.35rem;
+  }
+
+  &__value {
+    font-family: $font-family-sans-serif;
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: $charcoal;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  &__subtext {
+    font-size: 0.82rem;
+    color: $muted;
+    margin-bottom: 0.85rem;
+  }
+
+  &__cta {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $charcoal;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $gold-dark;
+      text-decoration: underline;
+    }
+  }
+}
+
+// ============================================================
+// 9. STAT ROW & SEGMENTED METRIC CLUSTERS
+// ============================================================
+.ss-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.ss-stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+
+  &__label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $muted;
+  }
+
+  &__value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $charcoal;
+    line-height: 1;
+    font-family: $font-family-sans-serif;
+  }
+
+  &--large &__value {
+    font-size: 2.5rem;
+  }
+}
+
+.ss-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+// Segmented Metric Cluster Bar (under greeting, like Crextio screenshot)
+.ss-metric-segments {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.ss-metric-segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  transition: all $transition-base;
+
+  &__label {
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  &__val {
+    font-weight: 700;
+    font-family: $font-family-monospace;
+  }
+
+  &--dark {
+    background: #1C1C1E;
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+
+  &--yellow {
+    background: $gold;
+    color: #1C1C1E;
+    box-shadow: 0 2px 10px rgba(247, 201, 62, 0.4);
+    .ss-metric-segment__label { opacity: 0.9; }
+  }
+
+  &--striped {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #2C2C2E;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.03),
+      rgba(0, 0, 0, 0.03) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
+  &--outline {
+    background: transparent;
+    border: 1px dashed rgba(0, 0, 0, 0.22);
+    color: #636366;
+  }
+}
+
+// Circular 32px Arrow Button for Card Headers (↗)
+.ss-card-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  color: #1C1C1E;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-base;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+
+  &:hover {
+    background: #1C1C1E;
+    color: #FFFFFF;
+    border-color: #1C1C1E;
+    transform: translate(1px, -1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover svg {
+    transform: translate(1px, -1px);
+  }
+}
+
+// ============================================================
+// 10. DATA PANEL — 28px Glassmorphic Bento Cards
+// ============================================================
+.ss-data-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  margin-bottom: 1.25rem;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-hover;
+  }
+
+  &__head {
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2, h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: $charcoal;
+      margin: 0;
+    }
+
+    a {
+      font-size: 0.8rem;
+      color: $charcoal;
+      font-weight: 600;
+      text-decoration: none;
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  &__body {
+    padding: 0;
+  }
+
+  &__empty {
+    padding: 2.5rem 1.25rem;
+    text-align: center;
+    color: $muted;
+    font-size: 0.85rem;
+  }
+}
+
+// Dark variant card (like "Attendance Report" / Priority Action in Crextio)
+.ss-dark-card {
+  background: #212124 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 28px !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.16) !important;
+
+  .ss-data-panel__head {
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    h2, h3 { color: #FFFFFF !important; }
+    a { color: $gold-light !important; }
+  }
+
+  .ss-panel-row {
+    border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+    &:hover { background: rgba(255, 255, 255, 0.04) !important; }
+    &__title { color: #FFFFFF !important; }
+    &__sub { color: #9E9EA7 !important; }
+  }
+
+  .ss-stat-block__label { color: #9E9EA7 !important; }
+  .ss-stat-block__value { color: #FFFFFF !important; }
+  .ss-tier1__label { color: #9E9EA7 !important; }
+}
+
+// ============================================================
+// 11. PANEL ROW — List items inside panels
+// ============================================================
+.ss-panel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.25rem;
+  border-bottom: 1px solid $warm-border-light;
+  gap: 0.75rem;
+  transition: background $transition-base;
+
+  &:last-child { border-bottom: none; }
+
+  &:hover {
+    background: rgba(45, 45, 45, 0.02);
+  }
+
+  &__main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $charcoal;
+    margin: 0;
+  }
+
+  &__sub {
+    font-size: 0.75rem;
+    color: $muted;
+    margin: 0.1rem 0 0;
+  }
+}
+
+// ============================================================
+// 12. DENSE TABLE
+// ============================================================
+.ss-dense-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+
+  th {
+    padding: 0.65rem 1.25rem;
+    font-weight: 600;
+    color: $muted;
+    border-bottom: 1px solid $warm-border;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: rgba(45, 45, 45, 0.02);
+  }
+
+  td {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid $warm-border-light;
+    vertical-align: middle;
+    color: $charcoal;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(45, 45, 45, 0.02); }
+}
+
+// ============================================================
+// 13. ACTION LINKS & BUTTONS
+// ============================================================
+.ss-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $gold;
+  text-decoration: none;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid $warm-border;
+  border-radius: 10px;
+  background: $card-white;
+  transition: all $transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background: $cream-bg;
+    border-color: $gold;
+    color: darken($gold, 8%);
+  }
+}
+
+.ss-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $charcoal;
+  text-decoration: none;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid $warm-border;
+  border-radius: 10px;
+  background: transparent;
+  transition: all $transition-base;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(45, 45, 45, 0.04);
+    border-color: $charcoal;
+  }
+}
+
+.btn-brass,
+.btn-yellow {
+  background: linear-gradient(135deg, #F8CE52 0%, #EEBC3A 100%) !important;
+  color: #141416 !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  font-weight: 600 !important;
+  border-radius: 9999px !important;
+  padding: 0.48rem 1.25rem !important;
+  box-shadow: 0 2px 8px rgba(238, 188, 58, 0.22) !important;
+  transition: all $transition-base !important;
+
+  &:hover {
+    background: linear-gradient(135deg, #F9D35E 0%, #E8B432 100%) !important;
+    color: #141416 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(238, 188, 58, 0.30) !important;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(238, 188, 58, 0.2) !important;
+  }
+}
+
+// ============================================================
+// 14. STATUS BADGES & PILLS
+// ============================================================
+.ss-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+  white-space: nowrap;
+
+  &--met     { background: rgba(92, 184, 92, 0.12); color: $status-met; }
+  &--gap     { background: rgba(217, 83, 79, 0.12); color: $status-gap; }
+  &--pending { background: rgba(232, 184, 74, 0.12); color: $status-developing; }
+  &--info    { background: rgba(91, 141, 239, 0.12); color: $status-blue; }
+}
+
+.ss-score-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-family-monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+  background: $cream-bg;
+  color: $charcoal;
+  border: 1px solid $warm-border;
+}
+
+// ============================================================
+// 15. PROGRESS BAR
+// ============================================================
+.ss-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: $warm-border;
+  border-radius: 50px;
+  overflow: hidden;
+
+  &__fill {
+    height: 100%;
+    border-radius: 50px;
+    background: $gold;
+    transition: width 600ms ease;
+  }
+
+  &--green &__fill { background: $status-met; }
+  &--red &__fill   { background: $status-gap; }
+}
+
+// ============================================================
+// 16. TABS (pill-style)
+// ============================================================
+.ss-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid $warm-border;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.ss-tab {
+  padding: 0.55rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: $muted;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all $transition-base;
+
+  &:hover {
+    color: $charcoal;
+  }
+
+  &.is-active {
+    color: $charcoal;
+    font-weight: 700;
+    border-bottom-color: $gold;
+  }
+}
+
+// ============================================================
+// 17. LANDING PAGE
+// ============================================================
+.ss-landing-wrapper {
+  min-height: 100vh;
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(ellipse 75% 60% at 94% 12%, rgba(253, 234, 168, 0.40) 0%, rgba(252, 241, 206, 0.20) 45%, transparent 75%),
+    radial-gradient(ellipse 60% 50% at 88% 88%, rgba(250, 228, 165, 0.24) 0%, rgba(252, 243, 218, 0.10) 50%, transparent 75%),
+    radial-gradient(circle 35% at 4% 96%, rgba(252, 238, 195, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 45% 25%, rgba(254, 248, 230, 0.25) 0%, transparent 65%);
+  background-attachment: fixed;
+  color: $charcoal;
+}
+
+.ss-navbar {
+  background: transparent;
+  transition: all 300ms ease;
+
+  &.is-scrolled {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  }
+
+  .navbar-brand {
+    color: $charcoal;
+    font-weight: 700;
+  }
+
+  .nav-link {
+    color: #6E6E73;
+    font-size: 0.86rem;
+    font-weight: 500;
+    transition: color $transition-base;
+    &:hover { color: $charcoal; }
+  }
+}
+
+.ss-hero {
+  padding: 5rem 0 4rem;
+
+  h1 {
+    color: $charcoal;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+}
+
+.ss-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $gold-dark;
+}
+
+.ss-accent-rule {
+  width: 48px;
+  height: 3px;
+  background: $gold;
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+}
+
+.ss-section {
+  padding: 4rem 0;
+
+  &--muted {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+}
+
+.ss-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+
+  &__head {
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__body {
+    padding: 1.4rem;
+  }
+}
+
+.ss-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+.ss-flow__step {
+  text-align: center;
+}
+
+.ss-flow__num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $charcoal;
+  color: $gold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+// Comparison table
+.ss-table-compare {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: $shadow-card;
+
+  th {
+    background: rgba(0, 0, 0, 0.03);
+    font-weight: 600;
+    color: $charcoal;
+    font-size: 0.8rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 0.85rem 1.25rem;
+  }
+
+  td {
+    font-size: 0.85rem;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 0.85rem 1.25rem;
+  }
+}
+
+// Role boxes on landing
+.ss-role-box {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  padding: 1.75rem;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-hover;
+    transform: translateY(-2px);
+  }
+
+  h3 { color: $charcoal; }
+}
+
+// Footer
+.ss-footer {
+  background: $charcoal;
+  color: rgba(255,255,255,0.7);
+  padding: 2.5rem 0;
+  font-size: 0.85rem;
+
+  a {
+    color: $gold-light;
+    text-decoration: none;
+    &:hover { color: $gold; }
+  }
+}
+
+// ============================================================
+// 18. LOGIN / REGISTER PAGES
+// ============================================================
+.ss-login-wrapper,
+.ss-register-wrapper {
+  min-height: 100vh;
+  display: flex;
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(ellipse 75% 60% at 94% 12%, rgba(253, 234, 168, 0.40) 0%, rgba(252, 241, 206, 0.20) 45%, transparent 75%),
+    radial-gradient(ellipse 60% 50% at 88% 88%, rgba(250, 228, 165, 0.24) 0%, rgba(252, 243, 218, 0.10) 50%, transparent 75%),
+    radial-gradient(circle 35% at 4% 96%, rgba(252, 238, 195, 0.16) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+.ss-login-aside {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  color: $charcoal;
+  position: relative;
+  max-width: 480px;
+
+  @media (min-width: 992px) {
+    display: flex;
+  }
+
+  &__quote {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #52525B;
+    position: relative;
+    padding-left: 1.25rem;
+    border-left: 3px solid $gold;
+  }
+
+  &__footer {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: $muted;
+  }
+}
+
+.ss-login-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.ss-login-card,
+.ss-register-card {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  padding: 2.5rem 2rem;
+  box-shadow: $shadow-card;
+}
+
+.ss-login-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  &__label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $muted;
+  }
+
+  &__proto {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: $charcoal;
+    background: $gold;
+    padding: 0.2rem 0.65rem;
+    border-radius: 50px;
+  }
+}
+
+// Demo role pills (compact horizontal chips underneath login form)
+.ss-demo-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.ss-demo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  background: #FFFFFF;
+  color: $charcoal;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+
+  &:hover {
+    background: #FFFDF8;
+    border-color: rgba(245, 199, 72, 0.85);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(245, 199, 72, 0.22);
+    color: $charcoal;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.is-active {
+    background: linear-gradient(135deg, #F8CE52 0%, #EEBC3A 100%);
+    border-color: #EEBC3A;
+    color: #141414;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(238, 188, 58, 0.28);
+  }
+
+  &__emoji {
+    font-size: 0.95rem;
+    line-height: 1;
+    display: inline-block;
+  }
+
+  &__label {
+    font-size: 0.76rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+}
+
+// Demo role cards (legacy support)
+.ss-demo-role-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: all $transition-base;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    border-color: $gold;
+    box-shadow: 0 4px 14px rgba(247, 201, 62, 0.2);
+    transform: translateY(-1px);
+    background: #FFFFFF;
+  }
+
+  &.is-active {
+    border-color: $gold;
+    background: rgba(247, 201, 62, 0.12);
+    box-shadow: 0 0 0 2px rgba(247, 201, 62, 0.35);
+  }
+
+  &__emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__role {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $charcoal;
+  }
+
+  &__type {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $gold;
+  }
+
+  &__desc {
+    font-size: 0.72rem;
+    color: $muted;
+    margin-top: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__action {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: $gold;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+// Form controls for login/register
+.ss-form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $charcoal;
+  margin-bottom: 0.3rem;
+}
+
+.ss-form-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid $warm-border;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: $charcoal;
+  background: $warm-white;
+  transition: border-color $transition-base;
+
+  &:focus {
+    outline: none;
+    border-color: $gold;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+  }
+
+  &::placeholder {
+    color: $muted;
+  }
+}
+
+// ============================================================
+// 19. PASSPORT CARD (bottom widget)
+// ============================================================
+.ss-passport-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: $charcoal;
+  border-radius: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+  }
+
+  &__bg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    color: rgba(255,255,255,0.05);
+  }
+
+  &__badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(201, 162, 39, 0.2);
+    color: $gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 0.15rem;
+  }
+
+  &__link {
+    font-size: 0.72rem;
+    color: $gold-light;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+// ============================================================
+// 20. NOTIFICATION BELL & LANGUAGE SELECTOR
+// ============================================================
+.ss-notification-btn,
+.ss-lang-btn,
+.ss-theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid $warm-border;
+  background: transparent;
+  color: $charcoal;
+  cursor: pointer;
+  position: relative;
+  transition: all $transition-base;
+
+  &:hover {
+    background: rgba(45, 45, 45, 0.05);
+  }
+}
+
+.ss-lang-btn {
+  width: auto;
+  border-radius: 50px;
+  padding: 0 0.75rem;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.ss-notification-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: $status-gap;
+  color: #FFFFFF;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ss-notification-dropdown,
+.ss-lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: $card-white;
+  border: 1px solid $warm-border;
+  border-radius: 16px;
+  box-shadow: $shadow-hover;
+  z-index: 300;
+  min-width: 280px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.ss-lang-dropdown {
+  min-width: 200px;
+  padding: 0.5rem;
+}
+
+.ss-lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  color: $charcoal;
+  cursor: pointer;
+  transition: background $transition-base;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+
+  &:hover { background: rgba(45, 45, 45, 0.04); }
+  &.is-active {
+    background: rgba(201, 162, 39, 0.08);
+    color: $gold;
+    font-weight: 600;
+  }
+}
+
+// ============================================================
+// 21. LOADING SKELETONS
+// ============================================================
+.ss-skeleton {
+  background: linear-gradient(90deg, $warm-border-light 25%, $warm-border 50%, $warm-border-light 75%);
+  background-size: 200% 100%;
+  animation: ss-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes ss-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ============================================================
+// 22. RESPONSIVE UTILITIES
+// ============================================================
+@media (max-width: 991.98px) {
+  .ss-topnav {
+    padding: 0.5rem 1rem;
+  }
+
+  .ss-content-area {
+    padding: 1rem;
+  }
+}
+
+// ============================================================
+// 23. SKILL BAR COMPONENT
+// ============================================================
+.ss-skill-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+
+  &__name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: $charcoal;
+    min-width: 100px;
+    flex-shrink: 0;
+  }
+
+  &__track {
+    flex: 1;
+    height: 8px;
+    background: $warm-border;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: 50px;
+    transition: width 600ms ease;
+  }
+
+  &__fill--met { background: $status-met; }
+  &__fill--gap { background: $status-gap; }
+  &__fill--developing { background: $status-developing; }
+
+  &__marker {
+    position: absolute;
+    top: -3px;
+    width: 2px;
+    height: 14px;
+    background: $charcoal;
+    border-radius: 1px;
+  }
+}
+
+// ============================================================
+// 24. CAREER PATHWAY / TIMELINE
+// ============================================================
+.ss-pathway {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0.75rem 1.25rem;
+  background: $card-white;
+  border: 1px solid $warm-border;
+  border-radius: 20px;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.ss-pathway__step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  color: $muted;
+  flex-shrink: 0;
+
+  &.is-complete {
+    color: $status-met;
+    font-weight: 600;
+  }
+
+  &.is-current {
+    color: $gold;
+    font-weight: 700;
+  }
+}
+
+.ss-pathway__arrow {
+  margin: 0 0.5rem;
+  color: $warm-border;
+  flex-shrink: 0;
+}
+
+// ============================================================
+// 25. CAREER MILESTONES
+// ============================================================
+.ss-milestones {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ss-milestone {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  position: relative;
+
+  &__marker {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: $cream-bg;
+    color: $muted;
+    border: 2px solid $warm-border;
+  }
+
+  &.is-complete &__marker {
+    background: $status-met;
+    border-color: $status-met;
+    color: #FFFFFF;
+  }
+
+  &.is-current &__marker {
+    background: $gold;
+    border-color: $gold;
+    color: #FFFFFF;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $charcoal;
+  }
+
+  &__sub {
+    font-size: 0.72rem;
+    color: $muted;
+  }
+}
+
+// ============================================================
+// 26. MODAL OVERRIDES
+// ============================================================
+.modal-content {
+  background: $card-white;
+  border: 1px solid $warm-border;
+  border-radius: 20px;
+  box-shadow: $shadow-hover;
+}
+
+.modal-header {
+  border-bottom-color: $warm-border-light;
+}
+
+.modal-footer {
+  border-top-color: $warm-border-light;
+}
+
+// ============================================================
+// 27. FORM CONTROLS (Bootstrap overrides)
+// ============================================================
+.form-control, .form-select {
+  border-color: $warm-border;
+  border-radius: 12px;
+  background-color: $warm-white;
+  color: $charcoal;
+
+  &:focus {
+    border-color: $gold;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+  }
+}
+
+// ============================================================
+// 28. BADGES & MISC
+// ============================================================
+.badge {
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 0.25em 0.65em;
+}
+
+// ============================================================
+// 29. DIRECTIVE CARD (Student dashboard primary directive)
+// ============================================================
+.ss-directive-card {
+  background: $charcoal;
+  color: $dark-card-text;
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: $shadow-card;
+
+  &__eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $gold;
+    background: rgba(201, 162, 39, 0.15);
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    display: inline-flex;
+    margin-bottom: 0.6rem;
+  }
+
+  &__impact {
+    font-size: 0.72rem;
+    color: $dark-card-muted;
+    float: right;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: $dark-card-text;
+  }
+
+  &__meta {
+    font-size: 0.78rem;
+    color: $dark-card-muted;
+    margin-bottom: 0.85rem;
+  }
+
+  .btn-brass {
+    font-size: 0.78rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+// ============================================================
+// 30. TRUST SEAL & VERIFIED BADGES
+// ============================================================
+.ss-trust-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $status-met;
+  font-family: $font-family-monospace;
+}
+
+// ============================================================
+// 31. REGISTER PAGE
+// ============================================================
+.ss-register-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(165deg, #FAF8F5 0%, #F0EBE3 50%, #E8E2D8 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.ss-register-card {
+  width: 100%;
+  max-width: 560px;
+  background: $card-white;
+  border: 1px solid $warm-border;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow: $shadow-soft;
+}
+
+// ============================================================
+// DARK THEME
+// ============================================================
+[data-theme="dark"] {
+  // Base & Radial Mesh
+  body,
+  .ss-app-layout,
+  .ss-landing-wrapper,
+  .ss-login-wrapper,
+  .ss-register-wrapper {
+    background-color: #141416 !important;
+    background-image:
+      radial-gradient(ellipse 65% 50% at 92% 14%, rgba(247, 201, 62, 0.16) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 45% at 86% 85%, rgba(247, 201, 62, 0.10) 0%, transparent 70%),
+      radial-gradient(circle 30% at 4% 96%, rgba(247, 201, 62, 0.08) 0%, transparent 60%) !important;
+    background-attachment: fixed !important;
+    color: #E8E2D8 !important;
+  }
+
+  // Top nav
+  .ss-topnav {
+    background: rgba(20, 20, 22, 0.85) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .ss-topnav__title {
+    color: #F5F0E8 !important;
+  }
+
+  .ss-topnav__logo {
+    background: #2D2D2D !important;
+  }
+
+  .ss-brand-pill {
+    background: rgba(33, 33, 36, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #F5F0E8 !important;
+
+    &:hover {
+      background: #28282B !important;
+      border-color: rgba(255, 255, 255, 0.28) !important;
+      color: #F5F0E8 !important;
+    }
+  }
+
+  .ss-nav-pill {
+    color: #A8A29E !important;
+
+    &:hover {
+      color: #F5F0E8 !important;
+      background: rgba(255,255,255,0.06) !important;
+    }
+
+    &.is-active {
+      background: #F5F0E8 !important;
+      color: #141414 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+  }
+
+  .ss-nav-more__menu {
+    background: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+  }
+
+  .ss-nav-more__item {
+    color: #E8E2D8 !important;
+    &:hover { background: rgba(255,255,255,0.05) !important; }
+    &.is-active { background: rgba(247, 201, 62, 0.15) !important; color: $gold !important; }
+  }
+
+  // Search
+  .ss-search-box {
+    background: rgba(28, 28, 32, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .ss-search-input {
+    color: #F5F0E8 !important;
+  }
+
+  .ss-search-key {
+    background: #2D2D2D !important;
+    border-color: #3A3A3A !important;
+    color: #A8A29E !important;
+  }
+
+  // User
+  .ss-user-name { color: #F5F0E8 !important; }
+  .ss-user-sub  { color: #A8A29E !important; }
+
+  // Icon btn & Theme toggle
+  .ss-icon-btn,
+  .ss-theme-toggle-btn {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F5C748 !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: none !important;
+    &:hover {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.22) !important;
+      color: #F8CE52 !important;
+    }
+  }
+
+  // Dashboard header & Stat blocks
+  .ss-dash-header__title { color: #F5F0E8 !important; }
+  .ss-dash-header__sub   { color: #A8A29E !important; }
+  .ss-stat-block__value  { color: #F5F0E8 !important; }
+  .ss-stat-block__label  { color: #A8A29E !important; }
+  .ss-stat-divider       { background: rgba(255, 255, 255, 0.14) !important; }
+
+  // Tier 1 & Glassmorphic cards
+  .ss-tier1 {
+    background: rgba(28, 28, 32, 0.88) !important;
+    backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    border-left-color: $gold !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4) !important;
+
+    .ss-tier1__label { color: #A8A29E !important; }
+    .ss-tier1__value { color: #F5F0E8 !important; }
+    .ss-tier1__subtext { color: #A8A29E !important; }
+    .ss-stat-block__label { color: #A8A29E !important; }
+    .ss-stat-block__value { color: #F5F0E8 !important; }
+  }
+
+  // Data panel
+  .ss-data-panel {
+    background: rgba(28, 28, 32, 0.88) !important;
+    backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4) !important;
+
+    &__head {
+      background: transparent !important;
+      border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+      h2, h3 { color: #F5F0E8 !important; }
+      a { color: $gold !important; }
+    }
+
+    &__empty { color: #6B6560 !important; }
+  }
+
+  .ss-card-arrow-btn {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #F5F0E8 !important;
+
+    &:hover {
+      background: $gold !important;
+      color: #141416 !important;
+      border-color: $gold !important;
+    }
+  }
+
+  // Panel row
+  .ss-panel-row {
+    border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+    &:hover { background: rgba(255,255,255,0.03) !important; }
+    &__title { color: #F5F0E8 !important; }
+    &__sub   { color: #A8A29E !important; }
+  }
+
+  // Dense table
+  .ss-dense-table {
+    th {
+      background: #1F1F1F !important;
+      border-bottom-color: #2E2E2E !important;
+      color: #A8A29E !important;
+    }
+    td {
+      border-bottom-color: #2E2E2E !important;
+      color: #E8E2D8 !important;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.03) !important; }
+  }
+
+  // Score pill
+  .ss-score-pill {
+    background: #2D2D2D !important;
+    color: #F5F0E8 !important;
+    border-color: #3A3A3A !important;
+  }
+
+  // Action link
+  .ss-action-link {
+    background: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+    color: #E8E2D8 !important;
+    &:hover {
+      background: #2D2D2D !important;
+      color: $gold !important;
+    }
+  }
+
+  .ss-btn-ghost {
+    border-color: #2E2E2E !important;
+    color: #E8E2D8 !important;
+    &:hover {
+      background: #2D2D2D !important;
+    }
+  }
+
+  // Progress bar
+  .ss-progress-bar {
+    background: #2E2E2E !important;
+  }
+
+  // Tabs
+  .ss-tabs {
+    border-bottom-color: #2E2E2E !important;
+  }
+
+  .ss-tab {
+    color: #A8A29E !important;
+    &:hover { color: #F5F0E8 !important; }
+    &.is-active {
+      color: #F5F0E8 !important;
+      border-bottom-color: $gold !important;
+    }
+  }
+
+  // Pathway
+  .ss-pathway {
+    background: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+  }
+
+  // Directive card
+  .ss-directive-card {
+    background: #1F1F1F !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+  }
+
+  // Form controls
+  .form-control, .form-select, .ss-form-input {
+    background-color: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+    color: #E8E2D8 !important;
+
+    &:focus {
+      border-color: $gold !important;
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15) !important;
+    }
+  }
+
+  // Modal
+  .modal-content {
+    background: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+  }
+
+  .modal-header { border-bottom-color: #2E2E2E !important; }
+  .modal-footer { border-top-color: #2E2E2E !important; }
+
+  // Bootstrap overrides
+  .bg-light { background-color: #1C1C1C !important; }
+  .bg-white { background-color: #1C1C1C !important; }
+  .text-dark { color: #E8E2D8 !important; }
+  .text-secondary { color: #A8A29E !important; }
+  .text-muted { color: #A8A29E !important; }
+
+  .table {
+    color: #E8E2D8 !important;
+    border-color: #2E2E2E !important;
+    --bs-table-bg: #1C1C1C;
+    --bs-table-striped-bg: #1F1F1F;
+  }
+
+  .list-group-item {
+    background-color: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+    color: #E8E2D8 !important;
+  }
+
+  .card {
+    background-color: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+    color: #E8E2D8 !important;
+  }
+
+  .btn-outline-secondary {
+    border-color: #3A3A3A !important;
+    color: #E8E2D8 !important;
+    &:hover {
+      background: #2D2D2D !important;
+      color: #F5F0E8 !important;
+    }
+  }
+
+  .btn-outline-light {
+    border-color: #3A3A3A !important;
+    color: #E8E2D8 !important;
+  }
+
+  .progress {
+    background-color: #2E2E2E !important;
+  }
+
+  // Sidebar (Desktop & Mobile)
+  .ss-sidebar {
+    background-color: rgba(22, 22, 25, 0.92) !important;
+    border-right-color: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px);
+  }
+
+  .ss-sidebar__header { border-bottom-color: rgba(255, 255, 255, 0.08) !important; }
+  .ss-sidebar__brand-title { color: #F5F0E8 !important; }
+  .ss-sidebar__brand-subtitle { color: #A8A29E !important; }
+  .ss-sidebar__section-title { color: #71717A !important; }
+  .ss-sidebar__footer { border-top-color: rgba(255, 255, 255, 0.08) !important; }
+
+  .ss-nav-item {
+    color: #A8A29E !important;
+    &:hover {
+      background: rgba(255, 255, 255, 0.05) !important;
+      color: #F5F0E8 !important;
+    }
+    &.is-active {
+      background: #F7C93E !important;
+      color: #141414 !important;
+      font-weight: 700 !important;
+      .ss-nav-item__icon {
+        color: #141414 !important;
+        opacity: 1 !important;
+      }
+    }
+  }
+
+  .ss-role-chip {
+    background: rgba(247, 201, 62, 0.12) !important;
+    border-color: rgba(247, 201, 62, 0.25) !important;
+    color: #F5F0E8 !important;
+  }
+
+  // Notification & language
+  .ss-notification-btn,
+  .ss-lang-btn,
+  .ss-theme-btn {
+    border-color: #2E2E2E !important;
+    color: #E8E2D8 !important;
+    &:hover { background: rgba(255,255,255,0.05) !important; }
+  }
+
+  .ss-notification-dropdown,
+  .ss-lang-dropdown {
+    background: #1C1C1C !important;
+    border-color: #2E2E2E !important;
+  }
+
+  .ss-lang-option {
+    color: #E8E2D8 !important;
+    &:hover { background: rgba(255,255,255,0.05) !important; }
+    &.is-active { background: rgba(201, 162, 39, 0.12) !important; color: $gold !important; }
+  }
+
+  // Cards & Panels in dark mode
+  .ss-login-card,
+  .ss-register-card,
+  .ss-panel,
+  .ss-role-box {
+    background: rgba(28, 28, 32, 0.88) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .ss-login-aside__quote {
+    color: #A8A29E !important;
+    border-left-color: $gold !important;
+  }
+
+  .ss-login-meta__label { color: #A8A29E !important; }
+
+  .ss-demo-role-card {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(28, 28, 32, 0.85) !important;
+    &:hover {
+      border-color: $gold !important;
+      background: rgba(35, 35, 40, 0.95) !important;
+    }
+    &.is-active {
+      border-color: $gold !important;
+      background: rgba(247, 201, 62, 0.12) !important;
+      box-shadow: 0 0 0 2px rgba(247, 201, 62, 0.35) !important;
+    }
+    .ss-demo-role-card__role { color: #F5F0E8 !important; }
+    .ss-demo-role-card__desc { color: #A8A29E !important; }
+  }
+
+  .ss-demo-pill {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #E8E2D8 !important;
+    box-shadow: none !important;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: #F5C748 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 3px 10px rgba(245, 199, 72, 0.2) !important;
+    }
+
+    &.is-active {
+      background: linear-gradient(135deg, #F8CE52 0%, #EEBC3A 100%) !important;
+      color: #141414 !important;
+      border-color: #EEBC3A !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 8px rgba(238, 188, 58, 0.3) !important;
+    }
+  }
+
+  .ss-navbar {
+    &.is-scrolled {
+      background: rgba(20, 20, 22, 0.9) !important;
+      border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .navbar-brand { color: #F5F0E8 !important; }
+    .nav-link { color: #A8A29E !important; &:hover { color: #F5F0E8 !important; } }
+  }
+
+  .ss-hero h1 { color: #F5F0E8 !important; }
+
+  .ss-section--muted {
+    background: rgba(28, 28, 32, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .ss-panel__head { border-bottom-color: rgba(255, 255, 255, 0.08) !important; }
+
+  .ss-flow__num {
+    background: #2D2D2D !important;
+    color: $gold !important;
+  }
+
+  .ss-table-compare {
+    background: rgba(28, 28, 32, 0.88) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    th { background: rgba(35, 35, 40, 0.9) !important; border-bottom-color: rgba(255, 255, 255, 0.08) !important; color: #A8A29E !important; }
+    td { border-bottom-color: rgba(255, 255, 255, 0.06) !important; color: #E8E2D8 !important; }
+  }
+
+  .ss-role-box h3 { color: #F5F0E8 !important; }
+
+  .ss-footer {
+    background: #0A0A0A !important;
+  }
+
+  // Skill bar
+  .ss-skill-bar__name { color: #E8E2D8 !important; }
+  .ss-skill-bar__track { background: #2E2E2E !important; }
+
+  // Milestone
+  .ss-milestone__marker {
+    background: #2D2D2D !important;
+    border-color: #3A3A3A !important;
+    color: #A8A29E !important;
+  }
+  .ss-milestone.is-complete .ss-milestone__marker {
+    background: $status-met !important;
+    border-color: $status-met !important;
+    color: #FFFFFF !important;
+  }
+  .ss-milestone.is-current .ss-milestone__marker {
+    background: $gold !important;
+    border-color: $gold !important;
+    color: #FFFFFF !important;
+  }
+  .ss-milestone__title { color: #F5F0E8 !important; }
+  .ss-milestone__sub { color: #A8A29E !important; }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #F5F0E8 !important;
+  }
+
+  .ss-stepper__circle {
+    background: #1C1F28 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #A8A29E !important;
+
+    &--completed {
+      background: #28a745 !important;
+      color: #fff !important;
+      border-color: #28a745 !important;
+    }
+
+    &--current {
+      background: #F7C93E !important;
+      color: #12141A !important;
+      border-color: #F7C93E !important;
+    }
+  }
+
+  .ss-stepper__item:not(:last-child)::after {
+    background: rgba(255, 255, 255, 0.12) !important;
+  }
+}
+
+// Visual Stepper
+.ss-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 38px;
+      bottom: -22px;
+      width: 2px;
+      background: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  &__circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.88rem;
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.04);
+    color: #555;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    z-index: 1;
+
+    &--completed {
+      background: #28a745 !important;
+      color: #ffffff !important;
+      border-color: #28a745 !important;
+    }
+
+    &--current {
+      background: #F7C93E !important;
+      color: #1a1a1a !important;
+      border-color: #F7C93E !important;
+      box-shadow: 0 0 0 4px rgba(247, 201, 62, 0.25);
+    }
+  }
+}

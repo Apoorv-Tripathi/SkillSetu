@@ -1,0 +1,93 @@
+// ============================================================
+// SkillSetu — Crextio Design System Variables
+// Luminous Sunny Yellow / Deep Charcoal / Glassmorphic White
+// ============================================================
+
+// Base Canvas & Light Tokens (Warm ivory cream matching Crextio canvas)
+$canvas-bg:          #FAF8F5;
+$cream-bg:           #FAF8F5;
+$card-white:         rgba(255, 255, 255, 0.96);
+$card-solid:         #FFFFFF;
+$warm-white:         #FFFFFF;
+
+// Soothing Honey Amber (Warm, eye-comfortable match to Crextio "Hired 10%" & Progress Rings)
+$gold:               #F5C748;
+$gold-light:         #FEEAA0;
+$gold-dark:          #E5B838;
+$gold-muted:         #FDF1C8;
+$gold-glow:          rgba(245, 199, 72, 0.22);
+$yellow-tag:         rgba(245, 199, 72, 0.16);
+
+// Deep Charcoal & Neutrals
+$charcoal:           #1C1C1E;
+$charcoal-deep:      #141416;
+$warm-gray:          #71717A;
+$muted:              #8E8E93;
+$warm-border:        rgba(0, 0, 0, 0.06);
+$warm-border-light:  rgba(255, 255, 255, 0.95);
+
+// Status Colors
+$status-met:         #22C55E;
+$status-developing:  #F7C93E;
+$status-gap:         #EF4444;
+$status-purple:      #A855F7;
+$status-blue:        #3B82F6;
+
+// Dark Contrast Cards (Attendance Report / Onboarding Task in Crextio)
+$dark-card-bg:       #212124;
+$dark-card-text:     #FFFFFF;
+$dark-card-muted:    #9E9EA7;
+$dark-card-border:   rgba(255, 255, 255, 0.08);
+
+// Spacing Scale
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.25rem;
+$space-6: 1.5rem;
+$space-7: 2rem;
+$space-8: 3rem;
+
+// Soft Ambient Shadows & Elevation
+$shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.03);
+$shadow-soft:  0 8px 24px -4px rgba(0, 0, 0, 0.04);
+$shadow-card:  0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+$shadow-hover: 0 16px 36px -6px rgba(0, 0, 0, 0.07), 0 2px 4px 0 rgba(0, 0, 0, 0.03);
+
+$transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+
+// Border Radius — 28px for Bento Cards, 9999px for Pills
+$border-radius:       1.75rem; // 28px
+$border-radius-sm:    1rem;    // 16px
+$border-radius-lg:    2.25rem; // 36px
+$card-border-radius:  1.75rem; // 28px
+$btn-border-radius:   9999px;
+
+// Bootstrap overrides — must precede the bootstrap import
+$primary:       $charcoal;
+$secondary:     $muted;
+$success:       $status-met;
+$warning:       $gold;
+$danger:        $status-gap;
+$info:          $status-blue;
+$light:         $canvas-bg;
+$dark:          $charcoal;
+
+$body-bg:       $canvas-bg;
+$body-color:    $charcoal;
+$border-color:  $warm-border;
+
+$font-family-sans-serif: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-family-monospace:  "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+$headings-font-family:   "Plus Jakarta Sans", "Inter", sans-serif;
+$headings-font-weight:   500;
+$headings-color:         $charcoal;
+
+$enable-shadows:   false;
+$enable-gradients: false;
+$box-shadow:    $shadow-card;
+$box-shadow-sm: $shadow-sm;
+
+$link-color:       $charcoal;
+$link-hover-color: $gold-dark;
