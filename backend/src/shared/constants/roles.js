@@ -30,6 +30,7 @@ export const PHASE3_REGISTERABLE_ROLES = [
   ...PHASE2_REGISTERABLE_ROLES,
   ROLES.ACADEMICIAN,
   ROLES.RECRUITER,
+  ROLES.PLATFORM_ADMIN,
 ];
 
 // Recruiters manage postings/applicants exactly like an Industry account —

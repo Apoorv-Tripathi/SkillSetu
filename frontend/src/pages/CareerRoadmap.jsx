@@ -35,8 +35,8 @@ export default function CareerRoadmap() {
     setSelectedPathId(pathId);
     try {
       await api.updateCareerInterests({ targetRoles: [pathId] }, token);
-    } catch (e) {
-      console.error(e);
+    } catch {
+      // Gracefully ignore or keep local selection
     }
   };
 
@@ -105,15 +105,21 @@ export default function CareerRoadmap() {
                     <div className="col-md-3 col-sm-6" key={path.id}>
                       <div
                         onClick={() => handleSelectPath(path.id)}
-                        className={`p-3 h-100 transition-all cursor-pointer`}
+                        className="p-3 h-100 transition-all cursor-pointer"
                         style={{
-                          borderRadius: "18px",
+                          borderRadius: "16px",
                           cursor: "pointer",
-                          background: isSelected ? "#1C1C1E" : "rgba(0, 0, 0, 0.02)",
-                          color: isSelected ? "#FFFFFF" : "inherit",
-                          border: isSelected ? "1px solid #1C1C1E" : "1px solid rgba(0, 0, 0, 0.07)",
-                          boxShadow: isSelected ? "0 8px 20px rgba(0, 0, 0, 0.15)" : "none",
-                          transition: "all 0.2s ease",
+                          background: isSelected
+                            ? "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)"
+                            : "#ffffff",
+                          color: isSelected ? "#ffffff" : "#1e293b",
+                          border: isSelected
+                            ? "1px solid #4338ca"
+                            : "1px solid #e2e8f0",
+                          boxShadow: isSelected
+                            ? "0 10px 25px rgba(79, 70, 229, 0.25)"
+                            : "0 2px 8px rgba(0, 0, 0, 0.03)",
+                          transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
                         }}
                       >
                         <div className="d-flex justify-content-between align-items-center mb-2">
@@ -121,17 +127,29 @@ export default function CareerRoadmap() {
                             {path.domain}
                           </span>
                           <span
-                            className="badge font-monospace"
+                            className="badge fw-bold"
                             style={{
-                              background: isSelected ? "rgba(247, 201, 62, 0.2)" : "rgba(247, 201, 62, 0.15)",
-                              color: isSelected ? "#F7C93E" : "#8A6D00",
+                              background: isSelected ? "rgba(255, 255, 255, 0.2)" : "rgba(79, 70, 229, 0.08)",
+                              color: isSelected ? "#ffffff" : "#4f46e5",
                               fontSize: "0.72rem",
                             }}
                           >
                             {path.matchPercentage}% {t("match", "match")}
                           </span>
                         </div>
-                        <div className={`fw-bold mb-2 text-truncate ${isSelected ? "text-white" : ""}`} title={path.title} style={{ fontSize: "0.92rem" }}>
+                        <div
+                          className={`fw-bold mb-2 ${isSelected ? "text-white" : "text-dark"}`}
+                          title={path.title}
+                          style={{
+                            fontSize: "0.92rem",
+                            minHeight: "2.5rem",
+                            lineHeight: "1.3",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                          }}
+                        >
                           {path.title}
                         </div>
                         <div className={`small ${isSelected ? "text-white-50" : "text-muted"}`} style={{ fontSize: "0.75rem" }}>
@@ -153,13 +171,13 @@ export default function CareerRoadmap() {
                 <div className="ss-data-panel">
                   <div className="ss-data-panel__head d-flex justify-content-between align-items-center">
                     <div>
-                      <span className="badge bg-success-subtle text-success text-uppercase me-2 font-monospace" style={{ fontSize: "0.68rem" }}>
+                      <span className="badge bg-success-subtle text-success text-uppercase me-2 fw-bold" style={{ fontSize: "0.68rem" }}>
                         {t("Active Track")}
                       </span>
                       <h2 className="d-inline mb-0" style={{ fontSize: "1.05rem" }}>{activePath.title} {t("nav_career_roadmap")}</h2>
                     </div>
-                    <span className="badge font-monospace px-3 py-2" style={{ background: "rgba(247, 201, 62, 0.2)", color: "#1C1C1E", fontSize: "0.85rem", fontWeight: 700 }}>
-                      {activePath.matchPercentage}% {t("Ready")}
+                    <span className="badge px-3 py-2 fw-bold" style={{ background: "rgba(247, 201, 62, 0.2)", color: "#1C1C1E", fontSize: "0.85rem" }}>
+                      {activePath.matchPercentage}% {t("Ready", "Ready").replace(/%/, "").trim()}
                     </span>
                   </div>
 
@@ -196,7 +214,7 @@ export default function CareerRoadmap() {
                               </span>
                             </div>
                             <p className="small text-muted mb-1">{t(st.description)}</p>
-                            <div className="small font-monospace text-muted" style={{ fontSize: "0.72rem" }}>{st.metrics}</div>
+                            <div className="small text-muted fw-medium" style={{ fontSize: "0.72rem" }}>{st.metrics}</div>
                           </div>
                         </div>
                       ))}
@@ -211,7 +229,7 @@ export default function CareerRoadmap() {
                             <div className="p-2 px-3 rounded-3 border d-flex justify-content-between align-items-center" style={{ background: "rgba(0,0,0,0.015)" }}>
                               <div>
                                 <span className="fw-semibold small">{item.skill}</span>
-                                <div className="small text-muted font-monospace" style={{ fontSize: "0.7rem" }}>
+                                <div className="small text-muted fw-medium" style={{ fontSize: "0.7rem" }}>
                                   {t("Proficiency")}: {item.score ? `${item.score.toFixed(1)} / 5.0` : t("Not evaluated")}
                                 </div>
                               </div>
@@ -287,12 +305,16 @@ export default function CareerRoadmap() {
                   </h3>
                   <div className="d-flex flex-column gap-2 my-3">
                     {activePath.recommendedCertifications?.map((rc) => (
-                      <div key={rc} className="p-2 rounded-3 small fw-semibold" style={{ background: "rgba(255,255,255,0.08)", color: "#FFFFFF" }}>
-                        ★ {rc}
+                      <div
+                        key={rc}
+                        className="p-2 px-3 rounded-3 small fw-semibold d-flex align-items-center gap-2"
+                        style={{ background: "#f8fafc", color: "#1e293b", border: "1px solid #e2e8f0" }}
+                      >
+                        <span className="text-warning">★</span> {rc}
                       </div>
                     ))}
                   </div>
-                  <Link to="/learning" className="btn btn-brass btn-sm w-100 fw-bold">
+                  <Link to="/learning" className="btn btn-primary btn-sm w-100 fw-bold rounded-pill shadow-sm">
                     {t("Browse Learning Modules →")}
                   </Link>
                 </div>
@@ -325,11 +347,15 @@ export default function CareerRoadmap() {
                       <div className="p-3 rounded-4 border h-100 d-flex flex-column justify-content-between" style={{ background: "rgba(0,0,0,0.015)" }}>
                         <div>
                           <div className="d-flex justify-content-between align-items-center mb-2">
-                            <span className="badge bg-secondary-subtle text-dark font-monospace small">
-                              {opp.type.toUpperCase()}
+                            <span className="badge bg-secondary-subtle text-dark fw-semibold small">
+                              {opp.type
+                                ? opp.type.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+                                : t("Opportunity")}
                             </span>
                             {opp.stipend && (
-                              <span className="small text-success fw-bold font-monospace">{opp.stipend}</span>
+                              <span className="badge bg-success-subtle text-success fw-bold text-nowrap" style={{ fontSize: "0.75rem" }}>
+                                {opp.stipend}
+                              </span>
                             )}
                           </div>
                           <h3 className="h6 fw-bold mb-1">{opp.title}</h3>

@@ -86,199 +86,231 @@ export default function PostOpportunity() {
         description="Define required competencies, duration, stipend, and eligibility — powering the deterministic match score candidates see."
       />
 
-      <div className="ss-card-modern" style={{ maxWidth: "720px" }}>
-        <div className="ss-card-modern__head">
-          <h2 className="ss-card-modern__title">Posting Details</h2>
-        </div>
-        {error && <div className="alert alert-danger">{error}</div>}
-
-        <form onSubmit={handleSubmit}>
-          <div className="row g-3">
-            <div className="col-md-8">
-              <label className="form-label small fw-semibold">Title</label>
-              <input
-                className="form-control"
-                required
-                placeholder="e.g. Clinical Research Intern, Full Stack Developer, Data Analyst"
-                value={form.title}
-                onChange={(e) => setForm({ ...form, title: e.target.value })}
-              />
-            </div>
-
-            <div className="col-md-4">
-              <label className="form-label small fw-semibold">Opportunity Type</label>
-              <select
-                className="form-select"
-                value={form.type}
-                onChange={(e) => setForm({ ...form, type: e.target.value })}
-              >
-                <option value="internship">Internship</option>
-                <option value="apprenticeship">Apprenticeship</option>
-                <option value="job">Placement / Full-Time Job</option>
-                <option value="training_program">Training Program</option>
-                <option value="certification_course">Certification Course</option>
-                <option value="workshop">Technical Workshop</option>
-                <option value="live_project">Live Industry Project</option>
-              </select>
-            </div>
-
-            <div className="col-12">
-              <label className="form-label small fw-semibold">Description</label>
-              <textarea
-                className="form-control"
-                rows={3}
-                required
-                placeholder="Describe role responsibilities, deliverables, or syllabus..."
-                value={form.description}
-                onChange={(e) => setForm({ ...form, description: e.target.value })}
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label small fw-semibold">Location / Base</label>
-              <input
-                className="form-control"
-                placeholder="e.g. New Delhi / Kanpur / Bengaluru"
-                value={form.location}
-                onChange={(e) => setForm({ ...form, location: e.target.value })}
-              />
-            </div>
-
-            <div className="col-md-6 d-flex align-items-center mt-4">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="isRemote"
-                  checked={form.isRemote}
-                  onChange={(e) => setForm({ ...form, isRemote: e.target.checked })}
-                />
-                <label className="form-check-label small" htmlFor="isRemote">
-                  Remote / Hybrid Work Allowed
-                </label>
+      <div className="row g-4">
+        <div className="col-lg-8">
+          <div className="card border rounded-4 p-4 shadow-sm bg-white">
+            <div className="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+              <div>
+                <h2 className="h6 fw-bold mb-0 text-dark">Opportunity & Role Specifications</h2>
+                <p className="text-muted small mb-0">Define candidate requirements and technical skill thresholds</p>
               </div>
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label small fw-semibold">Stipend / CTC / Fee</label>
-              <input
-                className="form-control"
-                placeholder="e.g. ₹25,000 / month or Free / Sponsored"
-                value={form.stipend}
-                onChange={(e) => setForm({ ...form, stipend: e.target.value })}
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label small fw-semibold">Duration</label>
-              <input
-                className="form-control"
-                placeholder="e.g. 3 Months, 6 Months, 8 Weeks"
-                value={form.duration}
-                onChange={(e) => setForm({ ...form, duration: e.target.value })}
-              />
-            </div>
-
-            {/* Eligibility Section */}
-            <div className="col-12 pt-2 border-top">
-              <span className="small fw-bold text-secondary text-uppercase d-block mb-2">
-                Candidate Eligibility (Optional)
+              <span className="badge bg-primary-subtle text-primary border border-primary-subtle rounded-3 font-monospace px-2.5 py-1">
+                AI Match Ready
               </span>
-              <div className="row g-2">
-                <div className="col-md-4">
-                  <label className="form-label small">Minimum CGPA (0-10)</label>
+            </div>
+
+            {error && <div className="alert alert-danger rounded-3">{error}</div>}
+
+            <form onSubmit={handleSubmit}>
+              <div className="row g-3">
+                <div className="col-md-8">
+                  <label className="form-label small fw-semibold">Title</label>
                   <input
-                    type="number"
-                    step="0.1"
-                    className="form-control form-control-sm"
-                    placeholder="e.g. 7.0"
-                    value={form.minGpa}
-                    onChange={(e) => setForm({ ...form, minGpa: e.target.value })}
+                    className="form-control rounded-3"
+                    required
+                    placeholder="e.g. Clinical Research Intern, Full Stack Developer, Data Analyst"
+                    value={form.title}
+                    onChange={(e) => setForm({ ...form, title: e.target.value })}
                   />
                 </div>
+
                 <div className="col-md-4">
-                  <label className="form-label small">Eligible Branches (comma separated)</label>
-                  <input
-                    className="form-control form-control-sm"
-                    placeholder="e.g. Computer Science, Health Informatics"
-                    value={form.eligibleBranches}
-                    onChange={(e) => setForm({ ...form, eligibleBranches: e.target.value })}
+                  <label className="form-label small fw-semibold">Opportunity Type</label>
+                  <select
+                    className="form-select rounded-3"
+                    value={form.type}
+                    onChange={(e) => setForm({ ...form, type: e.target.value })}
+                  >
+                    <option value="internship">Internship</option>
+                    <option value="apprenticeship">Apprenticeship</option>
+                    <option value="job">Placement / Full-Time Job</option>
+                    <option value="training_program">Training Program</option>
+                    <option value="certification_course">Certification Course</option>
+                    <option value="workshop">Technical Workshop</option>
+                    <option value="live_project">Live Industry Project</option>
+                  </select>
+                </div>
+
+                <div className="col-12">
+                  <label className="form-label small fw-semibold">Description</label>
+                  <textarea
+                    className="form-control rounded-3"
+                    rows={3}
+                    required
+                    placeholder="Describe role responsibilities, deliverables, or syllabus..."
+                    value={form.description}
+                    onChange={(e) => setForm({ ...form, description: e.target.value })}
                   />
                 </div>
-                <div className="col-md-4">
-                  <label className="form-label small">Graduation Years (comma separated)</label>
+
+                <div className="col-md-6">
+                  <label className="form-label small fw-semibold">Location / Base</label>
                   <input
-                    className="form-control form-control-sm"
-                    placeholder="e.g. 2026, 2027"
-                    value={form.graduationYears}
-                    onChange={(e) => setForm({ ...form, graduationYears: e.target.value })}
+                    className="form-control rounded-3"
+                    placeholder="e.g. New Delhi / Kanpur / Bengaluru"
+                    value={form.location}
+                    onChange={(e) => setForm({ ...form, location: e.target.value })}
                   />
+                </div>
+
+                <div className="col-md-6 d-flex align-items-center mt-4">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="isRemote"
+                      checked={form.isRemote}
+                      onChange={(e) => setForm({ ...form, isRemote: e.target.checked })}
+                    />
+                    <label className="form-check-label small" htmlFor="isRemote">
+                      Remote / Hybrid Work Allowed
+                    </label>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <label className="form-label small fw-semibold">Stipend / CTC / Fee</label>
+                  <input
+                    className="form-control rounded-3"
+                    placeholder="e.g. ₹25,000 / month or Free / Sponsored"
+                    value={form.stipend}
+                    onChange={(e) => setForm({ ...form, stipend: e.target.value })}
+                  />
+                </div>
+
+                <div className="col-md-6">
+                  <label className="form-label small fw-semibold">Duration</label>
+                  <input
+                    className="form-control rounded-3"
+                    placeholder="e.g. 3 Months, 6 Months, 8 Weeks"
+                    value={form.duration}
+                    onChange={(e) => setForm({ ...form, duration: e.target.value })}
+                  />
+                </div>
+
+                {/* Eligibility Section */}
+                <div className="col-12 pt-2 border-top">
+                  <span className="small fw-bold text-secondary text-uppercase d-block mb-2">
+                    Candidate Eligibility (Optional)
+                  </span>
+                  <div className="row g-2">
+                    <div className="col-md-4">
+                      <label className="form-label small">Minimum CGPA (0-10)</label>
+                      <input
+                        type="number"
+                        step="0.1"
+                        className="form-control form-control-sm rounded-3"
+                        placeholder="e.g. 7.0"
+                        value={form.minGpa}
+                        onChange={(e) => setForm({ ...form, minGpa: e.target.value })}
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <label className="form-label small">Eligible Branches (comma separated)</label>
+                      <input
+                        className="form-control form-control-sm rounded-3"
+                        placeholder="e.g. Computer Science, Health Informatics"
+                        value={form.eligibleBranches}
+                        onChange={(e) => setForm({ ...form, eligibleBranches: e.target.value })}
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <label className="form-label small">Graduation Years (comma separated)</label>
+                      <input
+                        className="form-control form-control-sm rounded-3"
+                        placeholder="e.g. 2026, 2027"
+                        value={form.graduationYears}
+                        onChange={(e) => setForm({ ...form, graduationYears: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Required Competencies */}
+                <div className="col-12 pt-2 border-top">
+                  <label className="form-label small fw-bold text-dark d-block">
+                    Required Competencies & Minimum Proficiency (1–5)
+                  </label>
+
+                  {requiredSkills.map((row, i) => (
+                    <div className="d-flex gap-2 mb-2 align-items-center" key={i}>
+                      <select
+                        className="form-select rounded-3"
+                        required
+                        value={row.skill}
+                        onChange={(e) => updateRow(i, "skill", e.target.value)}
+                      >
+                        <option value="">Select competency…</option>
+                        {skills.map((s) => (
+                          <option key={s._id} value={s._id}>
+                            {s.name} ({s.category})
+                          </option>
+                        ))}
+                      </select>
+
+                      <select
+                        className="form-select w-auto font-monospace rounded-3"
+                        value={row.minProficiency}
+                        onChange={(e) => updateRow(i, "minProficiency", Number(e.target.value))}
+                      >
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <option key={n} value={n}>
+                            ≥ {n}/5
+                          </option>
+                        ))}
+                      </select>
+
+                      {requiredSkills.length > 1 && (
+                        <button
+                          type="button"
+                          className="btn btn-outline-danger btn-sm rounded-3"
+                          onClick={() => removeRow(i)}
+                        >
+                          ×
+                        </button>
+                      )}
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary btn-sm rounded-3 mt-1"
+                    onClick={addRow}
+                  >
+                    + Add competency requirement
+                  </button>
+                </div>
+
+                <div className="col-12 pt-3 border-top">
+                  <button type="submit" className="btn btn-primary rounded-3 px-4 py-2 fw-semibold shadow-sm" disabled={submitting}>
+                    {submitting ? "Publishing…" : "Publish Opportunity / Program"}
+                  </button>
                 </div>
               </div>
+            </form>
+          </div>
+        </div>
+
+        {/* Right Column: Recruiter Matching Guidelines & Directives */}
+        <div className="col-lg-4">
+          <div className="card border rounded-4 p-4 shadow-sm bg-white mb-4">
+            <div className="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+              <span style={{ fontSize: "1.2rem" }}>🎯</span>
+              <h3 className="h6 fw-bold mb-0 text-dark">Objective Matching Engine</h3>
             </div>
-
-            {/* Required Competencies */}
-            <div className="col-12 pt-2 border-top">
-              <label className="form-label small fw-bold text-dark d-block">
-                Required Competencies & Minimum Proficiency (1–5)
-              </label>
-
-              {requiredSkills.map((row, i) => (
-                <div className="d-flex gap-2 mb-2 align-items-center" key={i}>
-                  <select
-                    className="form-select"
-                    required
-                    value={row.skill}
-                    onChange={(e) => updateRow(i, "skill", e.target.value)}
-                  >
-                    <option value="">Select competency…</option>
-                    {skills.map((s) => (
-                      <option key={s._id} value={s._id}>
-                        {s.name} ({s.category})
-                      </option>
-                    ))}
-                  </select>
-
-                  <select
-                    className="form-select w-auto font-monospace"
-                    value={row.minProficiency}
-                    onChange={(e) => updateRow(i, "minProficiency", Number(e.target.value))}
-                  >
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <option key={n} value={n}>
-                        ≥ {n}/5
-                      </option>
-                    ))}
-                  </select>
-
-                  {requiredSkills.length > 1 && (
-                    <button
-                      type="button"
-                      className="btn btn-outline-danger btn-sm"
-                      onClick={() => removeRow(i)}
-                    >
-                      ×
-                    </button>
-                  )}
-                </div>
-              ))}
-
-              <button
-                type="button"
-                className="btn btn-outline-secondary btn-sm mt-1"
-                onClick={addRow}
-              >
-                + Add competency requirement
-              </button>
-            </div>
-
-            <div className="col-12 pt-3 border-top">
-              <button type="submit" className="btn btn-primary" disabled={submitting}>
-                {submitting ? "Publishing…" : "Publish Opportunity / Program"}
-              </button>
+            <p className="text-muted small mb-3">
+              SkillSetu scores applicant resumes against <strong>verified rubric scores</strong> from practical lab assignments, biometrically-proctored semester exams, and official certifications.
+            </p>
+            <ul className="text-secondary small ps-3 mb-3 d-flex flex-column gap-2">
+              <li>Candidates meeting all minimum proficiency levels receive a <strong>High Match</strong> badge.</li>
+              <li>Students with minor deficits receive immediate remediation pathways before the interview stage.</li>
+              <li>You can view verifiable student work artifacts inside their Digital Skills Passport.</li>
+            </ul>
+            <div className="p-2.5 rounded-3 bg-light border text-muted small">
+              💡 <em>Tip: Specifying 2–4 core competencies produces the highest qualified applicant volume.</em>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </AppShell>
   );

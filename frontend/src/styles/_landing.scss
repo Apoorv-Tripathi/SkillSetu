@@ -1,0 +1,1585 @@
+// ============================================================
+// SkillSetu — Production-Grade Public Front Door Stylesheet
+// Fully Aligned with SkillSetu Royal Purple & Slate Design System
+// Matches Student, Academician, Institution, Industry Dashboards
+// ============================================================
+
+.ss-landing-wrapper {
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-family: inherit;
+  overflow-x: hidden;
+}
+
+// ── 1. Sticky Navigation Bar ──────────────────────────────────
+.ss-landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid #E2E8F0;
+  transition: all 0.2s ease;
+
+  &.is-scrolled {
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  }
+
+  .container {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.ss-landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: #0F172A;
+
+  &:hover {
+    color: #0F172A;
+  }
+
+  &__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  &__title {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+
+  &__sub {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #4F46E5;
+    letter-spacing: 0.01em;
+  }
+}
+
+.ss-landing-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  a {
+    color: #475569;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: #4F46E5;
+    }
+  }
+}
+
+.ss-landing-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ss-btn-nav-login {
+  color: #1E293B;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border: 1px solid #CBD5E1;
+  background: #FFFFFF;
+
+  &:hover {
+    color: #4F46E5;
+    background: #F8FAFC;
+    border-color: #A5B4FC;
+  }
+}
+
+.ss-btn-nav-cta {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.48rem 1.15rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.28);
+
+  &:hover {
+    background: linear-gradient(135deg, #5a70df 0%, #6b4196 100%);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.38);
+  }
+}
+
+.ss-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 0.4rem;
+  color: #0F172A;
+  cursor: pointer;
+}
+
+.ss-mobile-menu {
+  display: none;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  padding: 1.25rem;
+
+  &.is-open {
+    display: block;
+  }
+
+  .ss-mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+
+    a {
+      color: #334155;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+
+      &:hover {
+        color: #4F46E5;
+      }
+    }
+  }
+
+  .ss-mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+}
+
+// ── 2. Confident Asymmetric Split Hero ────────────────────────
+.ss-hero-section {
+  padding: 5.5rem 0 6rem 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.ss-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.ss-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ss-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.32rem 0.8rem 0.32rem 0.35rem;
+  background: #EEF2FF;
+  border: 1px solid #C7D2FE;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 1px 2px rgba(99, 102, 241, 0.05);
+
+  .badge-sih {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+
+  .pill-text {
+    color: #4338CA;
+    font-weight: 600;
+  }
+}
+
+.ss-hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.028em;
+  color: #0F172A;
+  margin-bottom: 1.35rem;
+  max-width: 580px;
+}
+
+.ss-hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #475569;
+  margin-bottom: 2.25rem;
+  max-width: 530px;
+}
+
+.ss-hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.75rem;
+}
+
+.ss-btn-hero-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.72rem 1.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.32);
+
+  &:hover {
+    background: linear-gradient(135deg, #5a70df 0%, #6b4196 100%);
+    color: #FFFFFF;
+    box-shadow: 0 5px 16px rgba(102, 126, 234, 0.42);
+    transform: translateY(-1px);
+  }
+}
+
+.ss-btn-hero-secondary {
+  background: #FFFFFF;
+  color: #1E293B;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.72rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid #CBD5E1;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #F8FAFC;
+    color: #4F46E5;
+    border-color: #A5B4FC;
+  }
+}
+
+.ss-hero-trust-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748B;
+
+  .trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    svg {
+      color: #10B981;
+    }
+  }
+}
+
+// ── Hero Right: Live Telemetry Preview Card ───────────────────
+.ss-hero-preview-col {
+  display: flex;
+  justify-content: center;
+}
+
+.ss-telemetry-card {
+  width: 100%;
+  max-width: 500px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 1.85rem 1.8rem;
+  box-shadow: 0 14px 32px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+}
+
+.ss-telemetry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #F1F5F9;
+  margin-bottom: 1.35rem;
+
+  .student-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .avatar-disc {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(102, 126, 234, 0.25);
+    }
+
+    .student-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+
+      .student-name {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #0F172A;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+
+        .verified-check {
+          color: #10B981;
+          display: inline-flex;
+        }
+      }
+
+      .student-sub {
+        font-size: 0.72rem;
+        color: #64748B;
+        margin-top: 0.2rem;
+      }
+    }
+  }
+
+  .apaar-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: #F5F3FF;
+    border: 1px solid #DDD6FE;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+
+    .apaar-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #6366F1;
+      letter-spacing: 0.04em;
+    }
+
+    .apaar-id {
+      font-family: monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #1E1B4B;
+    }
+  }
+}
+
+.ss-telemetry-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.6rem;
+
+  .metric-box {
+    background: #F8FAFC;
+    border: 1px solid #F1F5F9;
+    border-radius: 10px;
+    padding: 0.85rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .metric-num {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.2rem;
+
+      &.text-emerald { color: #059669; }
+      &.text-indigo { color: #4F46E5; }
+      &.text-amber { color: #D97706; }
+    }
+
+    .metric-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #64748B;
+    }
+  }
+}
+
+.ss-telemetry-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-bottom: 1.5rem;
+
+  .bars-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4F46E5;
+    margin-bottom: 0.35rem;
+
+    .benchmark-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.68rem;
+      text-transform: none;
+      color: #64748B;
+
+      .legend-line {
+        width: 10px;
+        height: 2px;
+        background: #4F46E5;
+        border-radius: 1px;
+      }
+    }
+  }
+
+  .telemetry-bar-row {
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.78rem;
+      margin-bottom: 0.45rem;
+
+      .skill-name {
+        font-weight: 600;
+        color: #1E293B;
+      }
+
+      .skill-score {
+        font-size: 0.72rem;
+        color: #64748B;
+
+        &.text-amber {
+          color: #B45309;
+        }
+
+        .delta {
+          font-size: 0.65rem;
+          color: #059669;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .bar-track {
+      height: 6px;
+      background: #F1F5F9;
+      border-radius: 999px;
+      position: relative;
+      overflow: visible;
+
+      .bar-fill {
+        height: 100%;
+        border-radius: 999px;
+
+        &.fill-emerald { background: #10B981; }
+        &.fill-indigo { background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); }
+        &.fill-amber { background: #F59E0B; }
+      }
+
+      .bar-target {
+        position: absolute;
+        top: -3px;
+        width: 2px;
+        height: 12px;
+        background: #4338CA;
+        border-radius: 1px;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+.ss-telemetry-stamp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.15rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid #F1F5F9;
+  font-size: 0.7rem;
+  color: #64748B;
+
+  .stamp-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    code {
+      font-family: monospace;
+      color: #4338CA;
+      font-weight: 700;
+      background: #EEF2FF;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+  }
+
+  .stamp-status {
+    color: #059669;
+    font-weight: 600;
+  }
+}
+
+// ── Shared Section Headers ────────────────────────────────────
+.ss-section-header {
+  max-width: 680px;
+  margin: 0 auto 3.5rem auto;
+
+  .ss-section-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #4F46E5;
+    background: #EEF2FF;
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+  }
+
+  .ss-section-heading {
+    font-size: 2.15rem;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
+  }
+
+  .ss-section-sub {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0;
+  }
+}
+
+// ── 3. The Shift: Traditional vs SkillSetu ────────────────────
+.ss-shift-section {
+  padding: 5.5rem 0;
+  background: #FFFFFF;
+}
+
+.ss-shift-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.ss-shift-card {
+  border-radius: 14px;
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+
+  &.broken-model {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+
+    .shift-badge.broken {
+      background: #F1F5F9;
+      color: #64748B;
+      border: 1px solid #E2E8F0;
+    }
+  }
+
+  &.skillsetu-model {
+    background: #FFFFFF;
+    border: 1.5px solid #C7D2FE;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.07);
+
+    .shift-badge.solved {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(102, 126, 234, 0.25);
+    }
+  }
+
+  .shift-card-header {
+    margin-bottom: 1.85rem;
+
+    .shift-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      font-size: 0.88rem;
+      color: #64748B;
+      line-height: 1.55;
+      margin: 0;
+    }
+  }
+
+  .shift-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+
+      .cross-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        background: #FEE2E2;
+        color: #DC2626;
+        font-size: 0.75rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      .check-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        background: #ECFDF5;
+        color: #059669;
+        font-size: 0.75rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      strong {
+        display: block;
+        color: #0F172A;
+        font-weight: 700;
+        margin-bottom: 0.15rem;
+      }
+
+      span {
+        color: #475569;
+      }
+    }
+  }
+}
+
+// ── 4. Connected Workflow Timeline ────────────────────────────
+.ss-workflow-section {
+  padding: 5.5rem 0;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.ss-workflow-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+
+.ss-workflow-step {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #A5B4FC;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.08);
+  }
+
+  .step-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .step-num {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #4F46E5;
+      font-family: monospace;
+    }
+
+    .step-phase {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #4338CA;
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+  }
+
+  .step-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-desc {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: #475569;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .step-output {
+    background: #F8FAFC;
+    border: 1px solid #EEF2FF;
+    border-radius: 6px;
+    padding: 0.5rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+
+    .output-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #4F46E5;
+    }
+
+    .output-val {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #1E1B4B;
+      margin-top: 0.15rem;
+    }
+  }
+}
+
+// ── 5. Multi-Stakeholder Ecosystem ────────────────────────────
+.ss-ecosystem-section {
+  padding: 5.5rem 0;
+  background: #FFFFFF;
+}
+
+.ss-role-tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+
+  .ss-role-tab-btn {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 0.65rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    .tab-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .tab-meta {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #64748B;
+      background: #F1F5F9;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    &:hover {
+      border-color: #C7D2FE;
+      background: #F8FAFC;
+
+      .tab-label {
+        color: #4F46E5;
+      }
+    }
+
+    &.is-active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.28);
+
+      .tab-label {
+        color: #FFFFFF;
+      }
+
+      .tab-meta {
+        background: rgba(255, 255, 255, 0.22);
+        color: #FFFFFF;
+      }
+    }
+  }
+}
+
+.ss-role-spotlight {
+  max-width: 1040px;
+  margin: 0 auto;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: center;
+
+  .spotlight-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+
+    .spotlight-role-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.22rem 0.65rem;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(102, 126, 234, 0.25);
+    }
+
+    .spotlight-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #4338CA;
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+  }
+
+  .spotlight-title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.85rem;
+  }
+
+  .spotlight-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 1.5rem;
+  }
+
+  .spotlight-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      font-size: 0.86rem;
+      color: #334155;
+
+      svg {
+        color: #10B981;
+        flex-shrink: 0;
+        margin-top: 0.2rem;
+      }
+    }
+  }
+
+  .spotlight-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+
+    .ss-btn-spotlight {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #FFFFFF;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.62rem 1.35rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+
+      &:hover {
+        background: linear-gradient(135deg, #5a70df 0%, #6b4196 100%);
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+      }
+    }
+
+    .spotlight-link-secondary {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4338CA;
+      text-decoration: none;
+
+      &:hover {
+        color: #1E1B4B;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Right Mock Widget inside Spotlight
+  .role-widget {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+
+    .widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid #F1F5F9;
+      margin-bottom: 1rem;
+
+      .widget-title {
+        font-size: 0.86rem;
+        font-weight: 700;
+        color: #0F172A;
+      }
+
+      .widget-status {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #059669;
+      }
+    }
+
+    .widget-metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+
+      .w-metric {
+        background: #F8FAFC;
+        border: 1px solid #F1F5F9;
+        border-radius: 8px;
+        padding: 0.65rem;
+
+        .w-label {
+          font-size: 0.68rem;
+          color: #64748B;
+          font-weight: 600;
+        }
+
+        .w-val {
+          font-size: 0.95rem;
+          font-weight: 800;
+          color: #0F172A;
+          margin-top: 0.2rem;
+
+          &.text-indigo { color: #4F46E5; }
+          &.text-emerald { color: #059669; }
+          &.text-amber { color: #D97706; }
+        }
+      }
+    }
+
+    .widget-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+
+      .w-list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.78rem;
+        padding: 0.45rem 0.6rem;
+        border-radius: 6px;
+        background: #F8FAFC;
+
+        span:first-child {
+          color: #334155;
+          font-weight: 500;
+        }
+
+        .tag-met {
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #059669;
+        }
+
+        .tag-dev {
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #D97706;
+        }
+
+        .tag-gap {
+          font-size: 0.7rem;
+          font-weight: 700;
+          color: #DC2626;
+        }
+      }
+    }
+  }
+}
+
+// ── 6. Verification Architecture ──────────────────────────────
+.ss-verification-section {
+  padding: 5.5rem 0;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.ss-verification-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #A5B4FC;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.08);
+  }
+
+  .pillar-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4338CA;
+    background: #EEF2FF;
+    border: 1px solid #C7D2FE;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.015em;
+  }
+
+  .pillar-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0;
+  }
+}
+
+// ── 7. National Frameworks Alignment ──────────────────────────
+.ss-frameworks-section {
+  padding: 5.5rem 0;
+  background: #FFFFFF;
+}
+
+.ss-frameworks-box {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+}
+
+.frameworks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.framework-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: #A5B4FC;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.06);
+  }
+
+  .framework-code {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #4338CA;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .framework-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 0.65rem;
+  }
+
+  .framework-detail {
+    font-size: 0.78rem;
+    color: #64748B;
+    line-height: 1.5;
+  }
+}
+
+.frameworks-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E2E8F0;
+
+  .compliance-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10B981;
+  }
+}
+
+// ── 8. Call-to-Action Section (Royal Purple Hero Aesthetic) ────
+.ss-cta-section {
+  padding: 6rem 0;
+  background: #FFFFFF;
+  border-top: 1px solid #E2E8F0;
+}
+
+.ss-cta-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #FFFFFF;
+  border-radius: 24px;
+  padding: 4.25rem 3rem;
+  box-shadow: 0 20px 44px -10px rgba(102, 126, 234, 0.35), 0 8px 18px -4px rgba(102, 126, 234, 0.2);
+
+  .cta-heading {
+    font-size: 2.35rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .cta-sub {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .ss-btn-cta-primary {
+    background: #FFFFFF;
+    color: #4338CA;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.78rem 1.85rem;
+    border-radius: 9px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.15s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+
+    &:hover {
+      background: #F8FAFC;
+      color: #3730A3;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+  }
+
+  .ss-btn-cta-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.78rem 1.75rem;
+    border-radius: 9px;
+    text-decoration: none;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.15s ease;
+    backdrop-filter: blur(4px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.7);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+  }
+
+  .cta-demo-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.65rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.88);
+    padding-top: 0.25rem;
+
+    .hint-title {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.92);
+      margin-right: 0.2rem;
+    }
+
+    .demo-chip {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #FFFFFF;
+      font-size: 0.76rem;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.24);
+      }
+    }
+
+    .demo-divider {
+      color: rgba(255, 255, 255, 0.4);
+      user-select: none;
+
+      @media (max-width: 767.98px) {
+        display: none;
+      }
+    }
+  }
+}
+
+// ── 9. Cohesive Platform Footer ──────────────────────────────
+.ss-landing-footer {
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  padding: 4.5rem 0 2rem 0;
+
+  .footer-top-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .footer-brand-col {
+    .footer-mission {
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: #64748B;
+      margin-top: 1rem;
+      max-width: 320px;
+    }
+  }
+
+  .footer-nav-col {
+    .footer-col-head {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #0F172A;
+      margin-bottom: 1.15rem;
+    }
+
+    .footer-link-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+
+      a {
+        color: #64748B;
+        text-decoration: none;
+        font-size: 0.84rem;
+        transition: color 0.15s ease;
+
+        &:hover {
+          color: #4F46E5;
+        }
+      }
+    }
+  }
+
+  .footer-bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    font-size: 0.8rem;
+    color: #64748B;
+
+    .footer-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: #334155;
+
+      .status-pip {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+      }
+    }
+  }
+}
+
+// ── Responsive Rules & Media Queries ──────────────────────────
+@media (max-width: 1199.98px) {
+  .ss-hero-title {
+    font-size: 2.45rem;
+  }
+
+  .frameworks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .ss-landing-nav-links {
+    display: none;
+  }
+
+  .ss-mobile-toggle {
+    display: block;
+  }
+
+  .ss-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .ss-hero-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .ss-hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ss-hero-trust-row {
+    justify-content: center;
+  }
+
+  .ss-shift-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ss-workflow-timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ss-role-spotlight {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .footer-top-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand-col {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ss-hero-section {
+    padding: 3rem 0;
+  }
+
+  .ss-hero-title {
+    font-size: 2.1rem;
+  }
+
+  .ss-workflow-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .frameworks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ss-cta-card {
+    padding: 2.5rem 1.5rem;
+
+    .cta-heading {
+      font-size: 1.85rem;
+    }
+  }
+
+  .footer-bottom-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ss-hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+
+    .ss-btn-hero-primary,
+    .ss-btn-hero-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .cta-button-row {
+    flex-direction: column;
+    width: 100%;
+
+    .ss-btn-cta-primary,
+    .ss-btn-cta-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .footer-top-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand-col {
+    grid-column: span 1;
+  }
+}
+

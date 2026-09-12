@@ -5,7 +5,7 @@ import { recomputeSkillGap } from "../services/skillGapEngine.js";
 
 export async function listAssessments(req, res, next) {
   try {
-    const assessments = await Assessment.find({ isActive: true }).select("title description createdAt");
+    const assessments = await Assessment.find({ isActive: true }).select("title description category durationMinutes questions createdAt");
     res.json({ assessments });
   } catch (err) {
     next(err);

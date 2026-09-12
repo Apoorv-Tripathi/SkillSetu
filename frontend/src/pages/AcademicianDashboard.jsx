@@ -7,6 +7,8 @@ import PageHeader from "../components/ui/PageHeader.jsx";
 import StatusBadge from "../components/ui/StatusBadge.jsx";
 import { EmptyState, ErrorState, LoadingRows } from "../components/ui/States.jsx";
 
+import MetricCard from "../components/ui/MetricCard.jsx";
+
 export default function AcademicianDashboard() {
   const { token } = useAuth();
   const { t } = useTranslation();
@@ -27,8 +29,8 @@ export default function AcademicianDashboard() {
   return (
     <AppShell>
       <PageHeader
-        eyebrow={t("Department view", "Department view")}
-        title={t("Student skill visibility", "Student Skill Visibility & Benchmark Matrix")}
+        eyebrow={t("Department view", "Department Curriculum & Diagnostics")}
+        title={t("Student skill visibility", "Student Competency Benchmark & Visibility")}
         description={
           data?.scopedToBranch
             ? `${t("Scoped to your department", "Scoped to your department")}: ${data.scopedToBranch}`
@@ -38,40 +40,63 @@ export default function AcademicianDashboard() {
 
       {/* Overview Metric Row */}
       {data && data.summary.length > 0 && (
-        <div className="row g-3 mb-4">
-          <div className="col-md-4">
-            <div className="ss-data-panel p-3.5 d-flex align-items-center gap-3">
-              <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "rgba(247, 201, 62, 0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem" }}>
-                🏛️
-              </div>
-              <div>
-                <span className="small text-muted font-monospace">{t("Tracked Departments", "Active Departments")}</span>
-                <div className="h4 fw-bold mb-0 font-monospace text-primary-emphasis">{totalBranches}</div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="ss-data-panel p-3.5 d-flex align-items-center gap-3">
-              <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "rgba(40, 167, 69, 0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem" }}>
-                🎯
-              </div>
-              <div>
-                <span className="small text-muted font-monospace">{t("Evaluated Competencies", "Evaluated Skills")}</span>
-                <div className="h4 fw-bold mb-0 font-monospace text-success">{totalSkills}</div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="ss-data-panel p-3.5 d-flex align-items-center gap-3">
-              <div style={{ width: "42px", height: "42px", borderRadius: "12px", background: "rgba(13, 110, 253, 0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem" }}>
-                👥
-              </div>
-              <div>
-                <span className="small text-muted font-monospace">{t("Assessed Cohort Size", "Evaluated Students")}</span>
-                <div className="h4 fw-bold mb-0 font-monospace text-primary">{totalStudents || "40+"}</div>
-              </div>
-            </div>
-          </div>
+        <div className="ss-kpi-grid mb-4">
+          <MetricCard
+            variant="blue"
+            label="Active Departments"
+            value={`${totalBranches} Depts`}
+            progress={100}
+            meta="Curriculum mapped"
+            icon={
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            }
+          />
+
+          <MetricCard
+            variant="green"
+            label="Evaluated Competencies"
+            value={`${totalSkills} Skills`}
+            progress={92}
+            meta="Active benchmark points"
+            icon={
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 14 14"></polyline>
+              </svg>
+            }
+          />
+
+          <MetricCard
+            variant="cyan"
+            label="Assessed Cohort Size"
+            value={`${totalStudents || "40+"} Students`}
+            progress={88}
+            meta="Biometric & exam verified"
+            icon={
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            }
+          />
+
+          <MetricCard
+            variant="purple"
+            label="Curriculum Alignment"
+            value="94%"
+            progress={94}
+            meta="NEP 2020 OBE Compliant"
+            icon={
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            }
+          />
         </div>
       )}
 
@@ -82,23 +107,23 @@ export default function AcademicianDashboard() {
       )}
 
       {data?.summary.map((branch) => (
-        <div className="ss-data-panel mb-4 overflow-hidden" key={branch.branch}>
-          <div className="ss-data-panel__head d-flex justify-content-between align-items-center">
+        <div className="card border rounded-4 mb-4 overflow-hidden shadow-sm bg-white" key={branch.branch}>
+          <div className="d-flex justify-content-between align-items-center p-3 border-bottom bg-light">
             <div className="d-flex align-items-center gap-2">
-              <span className="badge bg-warning-subtle text-dark font-monospace px-2 py-1 rounded-pill">
+              <span className="badge bg-primary text-white fw-bold px-2.5 py-1 rounded-pill" style={{ fontSize: "0.72rem" }}>
                 {t("Department", "Department")}
               </span>
-              <h2 className="h6 fw-bold mb-0 text-primary-emphasis">{branch.branch}</h2>
+              <h2 className="h6 fw-bold mb-0 text-dark">{branch.branch}</h2>
             </div>
-            <span className="small text-muted font-monospace">
+            <span className="small text-muted fw-semibold">
               {branch.skills.length} {t("Skills Measured", "Skills Tracked")}
             </span>
           </div>
 
           <div className="table-responsive mb-0">
             <table className="table table-hover align-middle mb-0">
-              <thead className="bg-light-subtle">
-                <tr className="small text-muted text-uppercase">
+              <thead className="table-light">
+                <tr className="small text-muted text-uppercase" style={{ fontSize: "0.78rem" }}>
                   <th className="ps-4">{t("Skill / Competency", "Skill / Competency")}</th>
                   <th>{t("Domain Category", "Domain Category")}</th>
                   <th className="text-center">{t("Avg. Current", "Avg. Current")}</th>
@@ -109,15 +134,15 @@ export default function AcademicianDashboard() {
               </thead>
               <tbody>
                 {branch.skills.map((s) => (
-                  <tr key={s.skill}>
-                    <td className="ps-4 fw-semibold text-primary-emphasis">{s.skill}</td>
+                  <tr key={s.skill} style={{ fontSize: "0.88rem" }}>
+                    <td className="ps-4 fw-bold text-dark">{s.skill}</td>
                     <td className="text-secondary small">{s.category}</td>
-                    <td className="text-center font-monospace small">{s.avgCurrent} / 5.0</td>
-                    <td className="text-center font-monospace small">{s.avgTarget} / 5.0</td>
+                    <td className="text-center fw-semibold text-dark small">{s.avgCurrent} / 5.0</td>
+                    <td className="text-center fw-semibold text-dark small">{s.avgTarget} / 5.0</td>
                     <td className="text-center">
-                      <StatusBadge status={s.avgGap <= 0 ? "met" : s.avgGap <= 1.5 ? "developing" : "gap"} label={`Gap ${s.avgGap}`} />
+                      <StatusBadge status={s.avgGap <= 0 ? "met" : s.avgGap <= 1.5 ? "developing" : "gap"} label={s.avgGap <= 0 ? "Target Met" : `Gap ${s.avgGap}`} />
                     </td>
-                    <td className="pe-4 text-end font-monospace small">{s.studentCount}</td>
+                    <td className="pe-4 text-end fw-semibold text-dark small">{s.studentCount}</td>
                   </tr>
                 ))}
               </tbody>

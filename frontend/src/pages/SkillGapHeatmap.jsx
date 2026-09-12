@@ -6,6 +6,7 @@ import { api } from "../api/client.js";
 import AppShell from "../components/ui/AppShell.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import StatusBadge from "../components/ui/StatusBadge.jsx";
+import MetricCard from "../components/ui/MetricCard.jsx";
 import { EmptyState, ErrorState, LoadingRows } from "../components/ui/States.jsx";
 
 export default function SkillGapHeatmap() {
@@ -41,41 +42,41 @@ export default function SkillGapHeatmap() {
 
       {counts && (
         <div className="row g-3 mb-4">
-          <div className="col-md-4">
-            <div className="ss-data-panel p-3">
-              <div className="d-flex align-items-center justify-content-between">
-                <span className="text-muted small fw-semibold text-uppercase">{t("Meets target", "Meets Target")}</span>
-                <span className="badge bg-success-subtle text-success small font-monospace">Mastered</span>
-              </div>
-              <div className="ss-stat-block__value mt-2" style={{ fontSize: "2.2rem", lineHeight: 1, color: "#10B981" }}>
-                {counts.met}
-              </div>
-              <span className="small text-muted">{t("skills_aligned", "Skills match industry demand")}</span>
-            </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Meets target", "Meets Target")}
+              value={`${counts.met} Skills`}
+              subtitle={t("skills_aligned", "Skills match industry demand")}
+              variant="green"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>}
+            />
           </div>
-          <div className="col-md-4">
-            <div className="ss-data-panel p-3">
-              <div className="d-flex align-items-center justify-content-between">
-                <span className="text-muted small fw-semibold text-uppercase">{t("Developing", "Developing")}</span>
-                <span className="badge bg-warning-subtle text-warning small font-monospace">In Progress</span>
-              </div>
-              <div className="ss-stat-block__value mt-2" style={{ fontSize: "2.2rem", lineHeight: 1, color: "#F59E0B" }}>
-                {counts.developing}
-              </div>
-              <span className="small text-muted">{t("skills_near_target", "Skills within 20% of benchmark")}</span>
-            </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Developing", "Developing")}
+              value={`${counts.developing} Skills`}
+              subtitle={t("skills_near_target", "Within 20% of benchmark")}
+              variant="amber"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>}
+            />
           </div>
-          <div className="col-md-4">
-            <div className="ss-data-panel p-3">
-              <div className="d-flex align-items-center justify-content-between">
-                <span className="text-muted small fw-semibold text-uppercase">{t("Significant gap", "Significant Gap")}</span>
-                <span className="badge bg-danger-subtle text-danger small font-monospace">Remediation Req.</span>
-              </div>
-              <div className="ss-stat-block__value mt-2" style={{ fontSize: "2.2rem", lineHeight: 1, color: "#EF4444" }}>
-                {counts.gap}
-              </div>
-              <span className="small text-muted">{t("skills_priority_fix", "Critical focus for placement")}</span>
-            </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Significant gap", "Significant Gap")}
+              value={`${counts.gap} Skills`}
+              subtitle={t("skills_priority_fix", "Critical focus for placement")}
+              variant="red"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>}
+            />
+          </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Target Benchmark", "Target Benchmark")}
+              value="Full Stack Dev"
+              subtitle={t("Employer Calibrated", "Employer Calibrated")}
+              variant="purple"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>}
+            />
           </div>
         </div>
       )}
@@ -87,7 +88,7 @@ export default function SkillGapHeatmap() {
           title={t("No evidence yet")}
           description={t("Take an assessment to generate your first heatmap.")}
           action={
-            <Link to="/assessments" className="btn btn-brass btn-sm">
+            <Link to="/assessments" className="btn btn-primary btn-sm rounded-pill">
               {t("Take an assessment")}
             </Link>
           }
@@ -130,10 +131,10 @@ export default function SkillGapHeatmap() {
 
                     <div className="d-flex justify-content-between align-items-center small text-muted mb-1">
                       <span>
-                        {t("Current")}: <strong className="text-dark font-monospace">{row.currentScore}/5</strong> · {t("Target")}: <strong className="font-monospace">{row.targetScore}/5</strong>
+                        {t("Current")}: <strong className="text-dark fw-bold">{row.currentScore}/5</strong> · {t("Target")}: <strong className="fw-bold">{row.targetScore}/5</strong>
                       </span>
-                      <span className={row.gap > 0 ? "text-danger fw-semibold" : "text-success fw-semibold"}>
-                        {row.gap > 0 ? `Gap: -${row.gap} pts` : `Target Met`}
+                      <span className={row.gap > 0 ? "badge bg-danger-subtle text-danger fw-bold" : "badge bg-success-subtle text-success fw-bold"}>
+                        {row.gap > 0 ? `Gap: -${row.gap} pts` : `✓ Fully Aligned`}
                       </span>
                     </div>
 
@@ -156,7 +157,11 @@ export default function SkillGapHeatmap() {
                         {t("Last updated by")}:{" "}
                         <strong>{t(row.lastEvidenceType === "mentor_evaluation" ? "mentor evaluation" : "self-assessment")}</strong>
                       </span>
-                      <Link to="/learning" className="text-decoration-none fw-semibold" style={{ color: "var(--gold, #F7C93E)" }}>
+                      <Link
+                        to="/learning"
+                        className="btn btn-outline-primary btn-sm rounded-pill px-3 py-0 fw-semibold"
+                        style={{ fontSize: "0.72rem", lineHeight: "1.6" }}
+                      >
                         Remediate in Hub →
                       </Link>
                     </div>
@@ -181,10 +186,10 @@ export default function SkillGapHeatmap() {
                 Completing recommended learning programs directly closes identified gaps and unlocks verified interview shortlists.
               </p>
               <div className="d-flex flex-column gap-2 mt-3">
-                <Link to="/learning" className="btn btn-brass btn-sm fw-bold">
+                <Link to="/learning" className="btn btn-primary btn-sm fw-bold rounded-pill">
                   Open Learning Hub →
                 </Link>
-                <Link to="/career-roadmap" className="ss-btn-ghost text-white border-secondary btn-sm text-center">
+                <Link to="/career-roadmap" className="btn btn-outline-secondary btn-sm rounded-pill text-center">
                   Review Career Roadmap
                 </Link>
               </div>

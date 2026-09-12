@@ -1,7 +1,7 @@
 const COLOR_BY_STATUS = {
-  met: "#3D6B4F",
-  developing: "#A77B3D",
-  gap: "#8C3A34",
+  met: "#10B981",
+  developing: "#3B82F6",
+  gap: "#EF4444",
 };
 
 // scale: the max value the bar represents (5 for proficiency scores, 100 for percentage scores)
@@ -10,7 +10,15 @@ export default function SkillBar({ name, current, target, status, scale = 5 }) {
   const fillPct = Math.min(100, Math.round((current / scale) * 100));
   const hasTarget = target !== undefined && target !== null;
   const targetPct = hasTarget ? Math.min(100, Math.round((target / scale) * 100)) : null;
-  const color = COLOR_BY_STATUS[status] || "#5C7185";
+
+  let color = COLOR_BY_STATUS[status];
+  if (!color) {
+    const ratio = current / scale;
+    if (ratio >= 0.8) color = "#10B981";
+    else if (ratio >= 0.6) color = "#4F46E5";
+    else if (ratio >= 0.4) color = "#F59E0B";
+    else color = "#EF4444";
+  }
 
   return (
     <div className="ss-skill-bar">

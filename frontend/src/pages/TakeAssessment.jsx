@@ -82,31 +82,30 @@ export default function TakeAssessment() {
 
         <form onSubmit={handleSubmit}>
           {assessment.questions.map((q, qi) => (
-            <div className="ss-panel mb-3" key={q.index}>
-              <div className="ss-panel__body">
-                <p className="fw-semibold small mb-3">
-                  {qi + 1}. {q.text}
-                </p>
-                {q.options.map((opt) => (
-                  <div className="form-check mb-2" key={opt.index}>
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name={`q-${q.index}`}
-                      id={`q-${q.index}-o-${opt.index}`}
-                      checked={answers[q.index] === opt.index}
-                      onChange={() => selectOption(q.index, opt.index)}
-                    />
-                    <label className="form-check-label small" htmlFor={`q-${q.index}-o-${opt.index}`}>
-                      {opt.text}
-                    </label>
-                  </div>
-                ))}
-              </div>
+            <div className="ss-card-modern mb-3 p-4" key={q.index}>
+              <p className="fw-bold fs-6 mb-3 text-dark">
+                {qi + 1}. {q.text}
+              </p>
+              {q.options.map((opt) => (
+                <div className="form-check mb-2" key={opt.index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name={`q-${q.index}`}
+                    id={`q-${q.index}-o-${opt.index}`}
+                    checked={answers[q.index] === opt.index}
+                    onChange={() => selectOption(q.index, opt.index)}
+                    style={{ cursor: "pointer" }}
+                  />
+                  <label className="form-check-label small text-secondary" htmlFor={`q-${q.index}-o-${opt.index}`} style={{ cursor: "pointer" }}>
+                    {opt.text}
+                  </label>
+                </div>
+              ))}
             </div>
           ))}
 
-          <button type="submit" className="btn btn-primary" disabled={!allAnswered || submitting}>
+          <button type="submit" className="btn btn-primary rounded-pill px-4 py-2 fw-semibold" disabled={!allAnswered || submitting}>
             {submitting ? t("Submitting…") : t("Submit assessment")}
           </button>
         </form>

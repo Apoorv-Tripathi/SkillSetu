@@ -5,6 +5,7 @@ import { api } from "../api/client.js";
 import AppShell from "../components/ui/AppShell.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import StatusBadge from "../components/ui/StatusBadge.jsx";
+import MetricCard from "../components/ui/MetricCard.jsx";
 import { EmptyState, ErrorState, LoadingRows } from "../components/ui/States.jsx";
 
 const EVIDENCE_TYPES = ["certificate", "project", "achievement", "document"];
@@ -100,13 +101,13 @@ export default function Portfolio() {
         actions={
           <div className="d-flex gap-2">
             <button
-              className="btn btn-outline-primary btn-sm"
+              className="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm"
               onClick={() => setShowPassportModal(true)}
             >
               🛡️ {t("View Digital Skill Passport")}
             </button>
             <button
-              className="btn btn-primary btn-sm"
+              className="btn btn-primary btn-sm rounded-pill px-3 shadow-sm"
               onClick={() => {
                 setForm((f) => ({ ...f, type: tab === "documents" ? "resume" : "project" }));
                 setShowForm((s) => !s);
@@ -117,6 +118,47 @@ export default function Portfolio() {
           </div>
         }
       />
+
+      {items && (
+        <div className="row g-3 mb-4">
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Verified Evidence", "Verified Evidence")}
+              value={`${verifiedItems.length} Records`}
+              subtitle={t("Institutional Trust Seal", "Institutional Trust Seal")}
+              variant="green"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>}
+            />
+          </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Verification Rate", "Verification Rate")}
+              value={`${verificationPercent}%`}
+              subtitle={t("Automated & Admin Audited", "Automated & Admin Audited")}
+              variant="blue"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>}
+            />
+          </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Pending Review", "Pending Review")}
+              value={`${items.filter((i) => i.verificationStatus === "pending").length} Items`}
+              subtitle={t("In Registrar Queue", "In Registrar Queue")}
+              variant="amber"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>}
+            />
+          </div>
+          <div className="col-md-3 col-sm-6">
+            <MetricCard
+              title={t("Total Portfolio", "Total Portfolio")}
+              value={`${items.length} Submissions`}
+              subtitle={t("Across All Categories", "Across All Categories")}
+              variant="purple"
+              icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            />
+          </div>
+        </div>
+      )}
 
       <ul className="nav nav-tabs mb-4">
         <li className="nav-item">
@@ -341,7 +383,7 @@ export default function Portfolio() {
 
             <button
               onClick={() => setShowPassportModal(true)}
-              className="btn btn-primary btn-sm w-100 mt-3"
+              className="btn btn-primary btn-sm w-100 mt-3 rounded-pill fw-semibold shadow-sm"
             >
               {t("Open Digital Passport Modal")}
             </button>
@@ -371,7 +413,7 @@ export default function Portfolio() {
               {/* Passport Header Banner */}
               <div
                 className="p-4 text-white position-relative"
-                style={{ background: "linear-gradient(135deg, #1C2333 0%, #2A364F 100%)" }}
+                style={{ background: "linear-gradient(135deg, #312e81 0%, #4338ca 100%)" }}
               >
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <div className="d-flex align-items-center gap-2">

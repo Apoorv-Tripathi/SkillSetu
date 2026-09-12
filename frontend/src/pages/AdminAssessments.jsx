@@ -119,7 +119,7 @@ export default function AdminAssessments() {
         title="Assessments"
         description="Every question maps to one skill — scoring stays deterministic and server-side, never an answer key sent to the client."
         actions={
-          <button className="btn btn-primary btn-sm" onClick={showForm ? () => setShowForm(false) : startNew}>
+          <button className="btn btn-primary btn-sm rounded-3 px-3 fw-semibold shadow-sm" onClick={showForm ? () => setShowForm(false) : startNew}>
             {showForm ? "Cancel" : "+ New assessment"}
           </button>
         }
@@ -128,7 +128,7 @@ export default function AdminAssessments() {
       {error && <div className="alert alert-danger">{error}</div>}
 
       {showForm && (
-        <form className="ss-data-panel mb-4 p-4" style={{ maxWidth: "720px", borderRadius: "24px" }} onSubmit={handleSubmit}>
+        <form className="ss-data-panel mb-4 p-4" style={{ maxWidth: "720px", borderRadius: "16px" }} onSubmit={handleSubmit}>
           <div className="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
             <h2 className="h6 fw-bold mb-0 text-primary-emphasis">
               {editingId ? "Edit Assessment" : "Author New Assessment"}
@@ -211,15 +211,15 @@ export default function AdminAssessments() {
                 </button>
               </div>
             ))}
-            <button type="button" className="btn btn-outline-secondary btn-sm mb-4 rounded-pill px-3" onClick={addQuestion}>
+            <button type="button" className="btn btn-outline-secondary btn-sm mb-4 rounded-3 px-3" onClick={addQuestion}>
               + Add Diagnostic Question
             </button>
 
             <div className="d-flex gap-2">
-              <button type="submit" className="btn btn-brass btn-sm px-4 fw-bold shadow-sm" disabled={submitting}>
+              <button type="submit" className="btn btn-primary btn-sm px-4 fw-semibold shadow-sm rounded-3" disabled={submitting}>
                 {submitting ? "Saving…" : editingId ? "Save Assessment" : "Publish Assessment"}
               </button>
-              <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setShowForm(false)}>
+              <button type="button" className="btn btn-outline-secondary btn-sm rounded-3" onClick={() => setShowForm(false)}>
                 Cancel
               </button>
             </div>
@@ -233,10 +233,13 @@ export default function AdminAssessments() {
       <div className="row g-3">
         {assessments?.map((a) => (
           <div key={a._id} className="col-12">
-            <div className="ss-data-panel p-3.5 d-flex justify-content-between align-items-center" style={{ borderRadius: "20px" }}>
+            <div className="ss-data-panel p-3.5 d-flex justify-content-between align-items-center" style={{ borderRadius: "14px" }}>
               <div className="d-flex align-items-center gap-3">
-                <div style={{ width: "40px", height: "40px", borderRadius: "12px", background: "rgba(247, 201, 62, 0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem" }}>
-                  📋
+                <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "#eef2ff", color: "#4f46e5", border: "1px solid #e0e7ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  </svg>
                 </div>
                 <div>
                   <h3 className="h6 fw-bold mb-1 text-primary-emphasis">{a.title}</h3>
@@ -247,9 +250,9 @@ export default function AdminAssessments() {
                   </div>
                 </div>
               </div>
-              <div className="d-flex align-items-center gap-3">
+              <div className="d-flex align-items-center gap-2.5">
                 <StatusBadge status={a.isActive ? "met" : "neutral"} label={a.isActive ? "Published" : "Draft"} />
-                <button className="btn btn-outline-secondary btn-sm rounded-pill px-3" onClick={() => startEdit(a)}>
+                <button className="btn btn-outline-secondary btn-sm rounded-3 px-3 fw-medium" onClick={() => startEdit(a)}>
                   Configure
                 </button>
               </div>

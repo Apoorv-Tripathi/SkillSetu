@@ -76,7 +76,7 @@ export default function AdminSkills() {
         description="Every skill's expected proficiency is the benchmark line used by the skill-gap engine platform-wide."
         actions={
           <button
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm rounded-3 px-3.5 fw-semibold shadow-sm"
             onClick={() => {
               setEditingId(null);
               setForm(BLANK);
@@ -91,7 +91,7 @@ export default function AdminSkills() {
       {error && <ErrorState message={error} />}
 
       {showForm && (
-        <form className="ss-data-panel mb-4 p-4" style={{ maxWidth: "520px", borderRadius: "24px" }} onSubmit={handleSubmit}>
+        <form className="ss-data-panel mb-4 p-4" style={{ maxWidth: "520px", borderRadius: "16px" }} onSubmit={handleSubmit}>
           <div className="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
             <h2 className="h6 fw-bold mb-0 text-primary-emphasis">
               {editingId ? "Edit Skill Benchmark" : "Define New Competency"}
@@ -124,10 +124,10 @@ export default function AdminSkills() {
               />
             </div>
             <div className="d-flex gap-2">
-              <button type="submit" className="btn btn-brass btn-sm px-4 fw-bold shadow-sm" disabled={submitting}>
+              <button type="submit" className="btn btn-primary btn-sm px-4 fw-semibold shadow-sm rounded-3" disabled={submitting}>
                 {submitting ? "Saving…" : editingId ? "Save Changes" : "Create Skill"}
               </button>
-              <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setShowForm(false)}>
+              <button type="button" className="btn btn-outline-secondary btn-sm rounded-3" onClick={() => setShowForm(false)}>
                 Cancel
               </button>
             </div>
@@ -139,7 +139,7 @@ export default function AdminSkills() {
       {skills && skills.length === 0 && <EmptyState title="No skills yet" />}
 
       {skills && skills.length > 0 && (
-        <div className="ss-data-panel overflow-hidden mb-4" style={{ borderRadius: "24px" }}>
+        <div className="ss-data-panel overflow-hidden mb-4" style={{ borderRadius: "16px" }}>
           <div className="ss-data-panel__head d-flex justify-content-between align-items-center">
             <h2 className="h6 fw-bold mb-0 text-primary-emphasis">Verified Industry Skill Library</h2>
             <span className="badge bg-secondary-subtle text-dark font-monospace small">
@@ -167,11 +167,11 @@ export default function AdminSkills() {
                     </td>
                     <td className="text-center font-monospace small fw-bold text-success">{s.expectedProficiency} / 5.0</td>
                     <td className="pe-4 text-end">
-                      <div className="d-flex gap-1 justify-content-end">
-                        <button className="btn btn-outline-secondary btn-sm rounded-pill px-3" onClick={() => startEdit(s)}>
+                      <div className="d-flex gap-1.5 justify-content-end">
+                        <button className="btn btn-outline-secondary btn-sm rounded-3 px-2.5 fw-medium" onClick={() => startEdit(s)}>
                           Edit
                         </button>
-                        <button className="btn btn-outline-danger btn-sm rounded-pill px-3" onClick={() => handleDelete(s._id)}>
+                        <button className="btn btn-outline-danger btn-sm rounded-3 px-2.5 fw-medium" onClick={() => handleDelete(s._id)}>
                           Delete
                         </button>
                       </div>

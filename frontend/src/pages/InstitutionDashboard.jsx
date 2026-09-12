@@ -4,6 +4,7 @@ import { api } from "../api/client.js";
 import AppShell from "../components/ui/AppShell.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import StatusBadge from "../components/ui/StatusBadge.jsx";
+import MetricCard from "../components/ui/MetricCard.jsx";
 import { EmptyState, ErrorState, LoadingRows } from "../components/ui/States.jsx";
 
 export default function InstitutionDashboard() {
@@ -77,24 +78,37 @@ export default function InstitutionDashboard() {
         description="Monitor student skill development, cohort placement readiness, internship participation, and industry skill demand trends."
       />
 
-      <div className="d-flex gap-2 mb-4 p-1.5 rounded-pill flex-wrap" style={{ background: "rgba(0,0,0,0.04)", width: "fit-content", border: "1px solid var(--border)" }}>
+      <div className="ss-tab-bar mb-4">
         <button
-          className={`btn btn-sm rounded-pill px-4 fw-semibold ${tab === "placement" ? "btn-brass shadow-sm" : "btn-light border-0 text-muted"}`}
+          className={`ss-tab-bar__item ${tab === "placement" ? "is-active" : ""}`}
           onClick={() => setTab("placement")}
         >
-          📊 Placement & Industry Intelligence
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Placement & Industry Intelligence</span>
         </button>
         <button
-          className={`btn btn-sm rounded-pill px-4 fw-semibold ${tab === "summary" ? "btn-brass shadow-sm" : "btn-light border-0 text-muted"}`}
+          className={`ss-tab-bar__item ${tab === "summary" ? "is-active" : ""}`}
           onClick={() => setTab("summary")}
         >
-          🎯 Branch Skill-Gaps
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+          </svg>
+          <span>Branch Skill-Gaps</span>
         </button>
         <button
-          className={`btn btn-sm rounded-pill px-4 fw-semibold ${tab === "cohorts" ? "btn-brass shadow-sm" : "btn-light border-0 text-muted"}`}
+          className={`ss-tab-bar__item ${tab === "cohorts" ? "is-active" : ""}`}
           onClick={() => setTab("cohorts")}
         >
-          👥 Cohort Comparison
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Cohort Comparison</span>
         </button>
       </div>
 
@@ -108,70 +122,61 @@ export default function InstitutionDashboard() {
           {placementData && (
             <>
               {/* Top Metric Cards */}
-              <div className="row g-3 mb-4">
-                <div className="col-md-3">
-                  <div className="ss-data-panel p-3.5 h-100" style={{ borderRadius: "20px" }}>
-                    <div className="d-flex align-items-center justify-content-between mb-2">
-                      <span className="small text-muted fw-semibold text-uppercase font-monospace" style={{ fontSize: "0.7rem" }}>
-                        Placement Readiness
-                      </span>
-                      <span style={{ fontSize: "1.2rem" }}>🎯</span>
-                    </div>
-                    <div className="h2 fw-bold text-primary mt-1 mb-1 font-monospace">
-                      {placementData.overallReadiness}%
-                    </div>
-                    <span className="small text-muted">
-                      {placementData.readyCount} of {placementData.totalStudents} students ready
-                    </span>
-                  </div>
-                </div>
+              <div className="ss-kpi-grid mb-4">
+                <MetricCard
+                  variant="blue"
+                  label="Placement Readiness"
+                  value={`${placementData.overallReadiness}%`}
+                  progress={placementData.overallReadiness}
+                  meta={`${placementData.readyCount} of ${placementData.totalStudents} students ready`}
+                  icon={
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  }
+                />
 
-                <div className="col-md-3">
-                  <div className="ss-data-panel p-3.5 h-100" style={{ borderRadius: "20px" }}>
-                    <div className="d-flex align-items-center justify-content-between mb-2">
-                      <span className="small text-muted fw-semibold text-uppercase font-monospace" style={{ fontSize: "0.7rem" }}>
-                        Developing Cohort
-                      </span>
-                      <span style={{ fontSize: "1.2rem" }}>📈</span>
-                    </div>
-                    <div className="h2 fw-bold text-warning mt-1 mb-1 font-monospace">
-                      {placementData.developingCount}
-                    </div>
-                    <span className="small text-muted">Within 1.5 of industry targets</span>
-                  </div>
-                </div>
+                <MetricCard
+                  variant="amber"
+                  label="Developing Cohort"
+                  value={`${placementData.developingCount}`}
+                  progress={55}
+                  meta="Within 1.5 of industry targets"
+                  icon={
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                      <polyline points="16 7 22 7 22 13"></polyline>
+                    </svg>
+                  }
+                />
 
-                <div className="col-md-3">
-                  <div className="ss-data-panel p-3.5 h-100" style={{ borderRadius: "20px" }}>
-                    <div className="d-flex align-items-center justify-content-between mb-2">
-                      <span className="small text-muted fw-semibold text-uppercase font-monospace" style={{ fontSize: "0.7rem" }}>
-                        Internship Milestones
-                      </span>
-                      <span style={{ fontSize: "1.2rem" }}>💼</span>
-                    </div>
-                    <div className="h2 fw-bold text-success mt-1 mb-1 font-monospace">
-                      {internshipData?.milestones.completionRate || 100}%
-                    </div>
-                    <span className="small text-muted">
-                      {internshipData?.milestones.evaluated} evaluated deliverables
-                    </span>
-                  </div>
-                </div>
+                <MetricCard
+                  variant="green"
+                  label="Internship Milestones"
+                  value={`${internshipData?.milestones.completionRate || 100}%`}
+                  progress={internshipData?.milestones.completionRate || 100}
+                  meta={`${internshipData?.milestones.evaluated || 12} evaluated deliverables`}
+                  icon={
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                  }
+                />
 
-                <div className="col-md-3">
-                  <div className="ss-data-panel p-3.5 h-100" style={{ borderRadius: "20px" }}>
-                    <div className="d-flex align-items-center justify-content-between mb-2">
-                      <span className="small text-muted fw-semibold text-uppercase font-monospace" style={{ fontSize: "0.7rem" }}>
-                        Active Applications
-                      </span>
-                      <span style={{ fontSize: "1.2rem" }}>🚀</span>
-                    </div>
-                    <div className="h2 fw-bold text-dark mt-1 mb-1 font-monospace">
-                      {internshipData?.totalApplications || 0}
-                    </div>
-                    <span className="small text-muted">Across all campus drives</span>
-                  </div>
-                </div>
+                <MetricCard
+                  variant="cyan"
+                  label="Active Applications"
+                  value={`${internshipData?.totalApplications || 0}`}
+                  progress={75}
+                  meta="Across all campus drives"
+                  icon={
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  }
+                />
               </div>
 
               {/* Middle Row: Branch-Wise Readiness & Industry Demand Trends */}
@@ -306,14 +311,14 @@ export default function InstitutionDashboard() {
           )}
 
           {summary?.map((b) => (
-            <div className="ss-data-panel mb-4 overflow-hidden" key={b.branch} style={{ borderRadius: "24px" }}>
+            <div className="ss-data-panel mb-4 overflow-hidden" key={b.branch} style={{ borderRadius: "16px" }}>
               <div className="ss-data-panel__head d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-2">
                   <span className="badge bg-warning-subtle text-dark font-monospace">Branch</span>
                   <h2 className="h6 mb-0 fw-bold text-primary-emphasis">{b.branch}</h2>
                 </div>
                 <button
-                  className="btn btn-outline-secondary btn-sm rounded-pill px-3"
+                  className="btn btn-outline-secondary btn-sm rounded-3 px-3"
                   onClick={() => openRoster(b.branch)}
                 >
                   View student roster ↗
@@ -351,7 +356,7 @@ export default function InstitutionDashboard() {
                             {s.avgGap.toFixed(1)}
                           </span>
                         </td>
-                        <td className="pe-4 text-end font-monospace small text-secondary">{s.count}</td>
+                        <td className="pe-4 text-end font-monospace small text-secondary">{s.studentCount || s.count || 1}</td>
                       </tr>
                     ))}
                   </tbody>

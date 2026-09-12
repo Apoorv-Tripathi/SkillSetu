@@ -10,6 +10,7 @@ import Opportunity from "../models/Opportunity.js";
 import Application from "../models/Application.js";
 import Milestone from "../models/Milestone.js";
 import PortfolioItem from "../models/PortfolioItem.js";
+import MentorshipRequest from "../models/MentorshipRequest.js";
 import CollaborationActivity from "../models/CollaborationActivity.js";
 import Notification from "../models/Notification.js";
 import { recomputeSkillGap } from "../services/skillGapEngine.js";
@@ -30,6 +31,7 @@ async function seed() {
     Application.deleteMany({}),
     Milestone.deleteMany({}),
     PortfolioItem.deleteMany({}),
+    MentorshipRequest.deleteMany({}),
     CollaborationActivity.deleteMany({}),
     Notification.deleteMany({}),
   ]);
@@ -56,7 +58,7 @@ async function seed() {
   ]);
   const byName = Object.fromEntries(skills.map((s) => [s.name, s]));
 
-  // 3. One Comprehensive Diagnostic Assessment
+  // 3. Four Comprehensive Diagnostic & Benchmarking Assessments
   const assessment = await Assessment.create({
     title: "Engineering & Full-Stack Readiness Assessment",
     description: "Evaluates core competencies across front-end component architecture, database modeling, and analytical problem solving.",
@@ -104,10 +106,86 @@ async function seed() {
     ],
   });
 
+  await Assessment.create({
+    title: "Data Structures & Algorithmic Problem Solving",
+    description: "Evaluates algorithmic efficiency, asymptotic complexity analysis, graph traversals, and dynamic programming optimization.",
+    category: "technical",
+    durationMinutes: 30,
+    passingScore: 3.5,
+    questions: [
+      {
+        text: "What is the tightest upper bound time complexity for searching in a balanced Binary Search Tree?",
+        skill: byName["Problem Solving"]._id,
+        options: [
+          { text: "O(n)", score: 1 },
+          { text: "O(log n)", score: 5 },
+          { text: "O(1)", score: 2 },
+          { text: "O(n log n)", score: 2 },
+        ],
+      },
+      {
+        text: "How do you detect and handle cycles during graph traversal algorithms?",
+        skill: byName["Problem Solving"]._id,
+        options: [
+          { text: "Naive recursion without tracking", score: 1 },
+          { text: "Using a visited set and recursion stack tracking / colors", score: 5 },
+          { text: "Queue without visited checks", score: 2 },
+        ],
+      },
+    ],
+  });
+
+  await Assessment.create({
+    title: "Cloud Native Microservices & System Design Benchmark",
+    description: "Industry benchmark for REST API architecture, distributed caching, horizontal scaling, and transactional integrity.",
+    category: "domain",
+    durationMinutes: 25,
+    passingScore: 3.0,
+    questions: [
+      {
+        text: "How do you optimize multi-table SQL queries under high concurrent read traffic?",
+        skill: byName["SQL"]._id,
+        options: [
+          { text: "Full table scans with wildcards", score: 1 },
+          { text: "Composite B-tree indices and connection pool sizing", score: 5 },
+          { text: "Client side in-memory filtering", score: 2 },
+        ],
+      },
+      {
+        text: "How do you structure stateless Node.js services for horizontal scaling behind a reverse proxy?",
+        skill: byName["Node.js"]._id,
+        options: [
+          { text: "In-memory session state per process", score: 1 },
+          { text: "Stateless authentication (JWT) with external Redis cache", score: 5 },
+          { text: "Synchronous file-system logging", score: 1 },
+        ],
+      },
+    ],
+  });
+
+  await Assessment.create({
+    title: "Professional Communication & Workplace Cognitive Aptitude",
+    description: "Evaluates cross-functional technical communication, stakeholder management, and collaborative problem solving.",
+    category: "soft_skill",
+    durationMinutes: 20,
+    passingScore: 3.5,
+    questions: [
+      {
+        text: "When communicating technical architectural decisions to cross-functional stakeholders, how do you frame trade-offs?",
+        skill: byName["Communication"]._id,
+        options: [
+          { text: "Use pure implementation jargon without business context", score: 1 },
+          { text: "Focus on business impact, risk mitigation, and visual architecture flowcharts", score: 5 },
+          { text: "Provide raw pull request links without explanation", score: 1 },
+        ],
+      },
+    ],
+  });
+
   // 4. Exact 5 Core Demo Users (Password: Demo@1234)
   const passwordHash = await bcrypt.hash("Demo@1234", 12);
 
-  const [student, academician, admin, industry, platformAdmin] = await User.insertMany([
+  const [student, academician, admin, industry, platformAdmin, student2, student3, mentor1, mentor2] = await User.insertMany([
     // Role 1: Student
     {
       name: "Aditi Sharma",
@@ -127,7 +205,7 @@ async function seed() {
       passwordHash,
       role: "academician",
       institution: institution._id,
-      department: "Computer Science & Engineering",
+      department: "Computer Science",
     },
     // Role 3: Institution Admin / TPO
     {
@@ -153,9 +231,53 @@ async function seed() {
       passwordHash,
       role: "platform_admin",
     },
+    // Cohort Student 2 (Information Technology)
+    {
+      name: "Rohan Gupta",
+      email: "rohan@demo.skillsetu.local",
+      passwordHash,
+      role: "student",
+      institution: institution._id,
+      branch: "Information Technology",
+      graduationYear: 2027,
+      careerInterests: ["Backend Systems", "Cloud Computing"],
+      targetRoles: ["backend"],
+    },
+    // Cohort Student 3 (Electronics)
+    {
+      name: "Priya Nair",
+      email: "priya@demo.skillsetu.local",
+      passwordHash,
+      role: "student",
+      institution: institution._id,
+      branch: "Electronics",
+      graduationYear: 2027,
+      careerInterests: ["Embedded Systems", "IoT"],
+      targetRoles: ["embedded"],
+    },
+    // Mentor 1: Full-Stack Architect
+    {
+      name: "Vikram Malhotra",
+      email: "mentor@demo.skillsetu.local",
+      passwordHash,
+      role: "mentor",
+      bio: "Principal Architect at CloudScale Tech with 12+ years building enterprise web apps and distributed microservices.",
+      expertiseSkills: [byName["JavaScript"]._id, byName["React"]._id, byName["Problem Solving"]._id],
+      isActive: true,
+    },
+    // Mentor 2: Lead Data Engineer
+    {
+      name: "Pooja Deshmukh",
+      email: "pooja.mentor@demo.skillsetu.local",
+      passwordHash,
+      role: "mentor",
+      bio: "Lead Data Engineer at AnalyticsPulse. Specializing in high-throughput query optimization and relational schema design.",
+      expertiseSkills: [byName["SQL"]._id, byName["Problem Solving"]._id],
+      isActive: true,
+    },
   ]);
 
-  // 5. Initial Assessment Result for Aditi (Produces clear, targeted skill gaps)
+  // 5. Initial Assessment Results (Produces clear, multi-branch cohort analytics)
   await AssessmentResult.create({
     student: student._id,
     assessment: assessment._id,
@@ -167,11 +289,39 @@ async function seed() {
       { skill: byName["Communication"]._id, score: 3.5 }, // 70%
     ],
   });
-
-  // Recompute deterministic skill gap metrics
   await recomputeSkillGap(student._id);
 
-  // 6. Two Clean Industry Opportunities
+  if (student2) {
+    await AssessmentResult.create({
+      student: student2._id,
+      assessment: assessment._id,
+      skillScores: [
+        { skill: byName["React"]._id, score: 3.8 },
+        { skill: byName["SQL"]._id, score: 4.0 },
+        { skill: byName["JavaScript"]._id, score: 4.2 },
+        { skill: byName["Problem Solving"]._id, score: 4.5 },
+        { skill: byName["Communication"]._id, score: 3.5 },
+      ],
+    });
+    await recomputeSkillGap(student2._id);
+  }
+
+  if (student3) {
+    await AssessmentResult.create({
+      student: student3._id,
+      assessment: assessment._id,
+      skillScores: [
+        { skill: byName["React"]._id, score: 2.5 },
+        { skill: byName["SQL"]._id, score: 2.0 },
+        { skill: byName["JavaScript"]._id, score: 2.8 },
+        { skill: byName["Problem Solving"]._id, score: 2.5 },
+        { skill: byName["Communication"]._id, score: 3.0 },
+      ],
+    });
+    await recomputeSkillGap(student3._id);
+  }
+
+  // 6. Industry Opportunities & Learning Marketplace Programs
   const internship = await Opportunity.create({
     title: "Frontend Engineering Intern",
     postedBy: industry._id,
@@ -194,7 +344,7 @@ async function seed() {
     },
   });
 
-  await Opportunity.create({
+  const liveProject = await Opportunity.create({
     title: "Full Stack Web Development Project",
     postedBy: industry._id,
     companyName: industry.companyName,
@@ -210,7 +360,92 @@ async function seed() {
     isRemote: true,
   });
 
-  // 7. Student Application for the Internship
+  await Opportunity.create({
+    title: "Backend Systems & Cloud Engineering Intern",
+    postedBy: industry._id,
+    companyName: industry.companyName,
+    type: "internship",
+    description: "Design high-performance REST APIs, manage database schemas, and deploy containerized microservices to cloud infrastructure.",
+    requiredSkills: [
+      { skill: byName["Node.js"]._id, minProficiency: 3 },
+      { skill: byName["SQL"]._id, minProficiency: 3 },
+    ],
+    stipend: "₹30,000 / month",
+    duration: "6 Months",
+    location: "Bengaluru / Hybrid",
+    isRemote: false,
+    eligibility: {
+      minGpa: 7.5,
+      eligibleBranches: ["Computer Science", "Information Technology"],
+      graduationYears: [2026, 2027],
+    },
+  });
+
+  // Learning Marketplace Programs
+  await Opportunity.create({
+    title: "Advanced React & Modern UI Architecture",
+    postedBy: industry._id,
+    companyName: "Meta / Coursera Open Education",
+    type: "training_program",
+    description: "Comprehensive 6-week industry module covering concurrent mode, server components, custom hook optimization, and accessible UI tokens.",
+    requiredSkills: [
+      { skill: byName["React"]._id, minProficiency: 3 },
+      { skill: byName["JavaScript"]._id, minProficiency: 3 },
+    ],
+    stipend: "Industry Sponsored · Free Enrollment",
+    duration: "6 Weeks",
+    location: "Online / Self-Paced",
+    isRemote: true,
+  });
+
+  await Opportunity.create({
+    title: "Distributed Systems & Cloud Scale Architecture",
+    postedBy: industry._id,
+    companyName: "NPTEL & Google Cloud Campus",
+    type: "certification_course",
+    description: "Master horizontal scaling, distributed message queues (Kafka), microservice boundaries, and fault-tolerant cloud patterns.",
+    requiredSkills: [
+      { skill: byName["Node.js"]._id, minProficiency: 3 },
+      { skill: byName["Problem Solving"]._id, minProficiency: 3 },
+    ],
+    stipend: "Verified National Certification",
+    duration: "8 Weeks",
+    location: "Online / Interactive",
+    isRemote: true,
+  });
+
+  await Opportunity.create({
+    title: "Enterprise PostgreSQL & Data Architecture Masterclass",
+    postedBy: industry._id,
+    companyName: "Scaler Topics / Open Guild",
+    type: "workshop",
+    description: "Hands-on weekend bootcamp on query plan analysis (EXPLAIN ANALYZE), connection pooling, vacuuming, and partitioning.",
+    requiredSkills: [
+      { skill: byName["SQL"]._id, minProficiency: 3 },
+    ],
+    stipend: "Hands-on Lab & Certificate",
+    duration: "2 Weeks",
+    location: "Live Virtual Bootcamp",
+    isRemote: true,
+  });
+
+  await Opportunity.create({
+    title: "Applied AI Systems & Prompt Engineering Bootcamp",
+    postedBy: industry._id,
+    companyName: "Vertex AI Research Labs",
+    type: "training_program",
+    description: "Build LLM applications using vector embeddings, semantic retrieval, RAG workflows, and evaluation pipelines.",
+    requiredSkills: [
+      { skill: byName["JavaScript"]._id, minProficiency: 3 },
+      { skill: byName["Problem Solving"]._id, minProficiency: 3 },
+    ],
+    stipend: "Full Sponsorship",
+    duration: "4 Weeks",
+    location: "Online",
+    isRemote: true,
+  });
+
+  // 7. Student Applications
   const { overallScore, breakdown } = await computeMatch(student._id, internship.requiredSkills);
   const application = await Application.create({
     student: student._id,
@@ -221,17 +456,41 @@ async function seed() {
     timeline: [
       { status: "applied" },
       { status: "shortlisted", note: "Verified portfolio and strong diagnostic scores in JavaScript and Problem Solving." },
-      { status: "interview", note: "Scheduled for technical discussion round." },
+      { status: "interview", note: "Scheduled for technical discussion round with engineering leadership." },
     ],
   });
 
-  // 8. One Active Milestone
+  const { overallScore: score2, breakdown: bd2 } = await computeMatch(student._id, liveProject.requiredSkills);
+  await Application.create({
+    student: student._id,
+    opportunity: liveProject._id,
+    matchScore: score2 || 92,
+    matchBreakdown: bd2,
+    status: "shortlisted",
+    timeline: [
+      { status: "applied" },
+      { status: "shortlisted", note: "Candidate qualified for 8-week industry development sprint." },
+    ],
+  });
+
+  // 8. Active Milestones
   await Milestone.create({
     application: application._id,
     student: student._id,
+    mentor: industry._id,
     title: "Milestone 1 — Component Library Architecture",
     description: "Implement 3 responsive, accessible UI components matching the design system specifications.",
     dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    status: "pending",
+  });
+
+  await Milestone.create({
+    application: application._id,
+    student: student._id,
+    mentor: industry._id,
+    title: "Milestone 2 — State Management & API Integration",
+    description: "Connect frontend form validation with asynchronous backend services and handle edge cases gracefully.",
+    dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
     status: "pending",
   });
 
@@ -274,7 +533,23 @@ async function seed() {
     institution: institution._id,
   });
 
-  // 11. Single Notification for Student
+  // 11. Mentorship Connections
+  await MentorshipRequest.create({
+    student: student._id,
+    mentor: mentor1._id,
+    message: "Looking forward to your guidance on React component architecture and system design.",
+    status: "accepted",
+    respondedAt: new Date("2026-05-18"),
+  });
+
+  await MentorshipRequest.create({
+    student: student._id,
+    mentor: mentor2._id,
+    message: "Hi Pooja, I would appreciate your mentorship on PostgreSQL indexing and query plan optimization.",
+    status: "pending",
+  });
+
+  // 12. Single Notification for Student
   await Notification.create({
     user: student._id,
     type: "application_status",

@@ -6,7 +6,12 @@ import User from "../models/User.js";
 // callers add branch/graduationYear filters without duplicating the pipeline.
 export async function computeSkillGapSummary(institutionId, { branch, graduationYear } = {}) {
   const studentMatch = { "studentDoc.institution": institutionId };
-  if (branch) studentMatch["studentDoc.branch"] = branch;
+  if (branch) {
+    const baseBranch = branch.split(/&|\/|\s-\s/)[0].trim();
+    studentMatch["studentDoc.branch"] = {
+      $regex: new RegExp(baseBranch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
+    };
+  }
   if (graduationYear) studentMatch["studentDoc.graduationYear"] = Number(graduationYear);
 
   const rows = await SkillGapRecord.aggregate([

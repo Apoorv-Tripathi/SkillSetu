@@ -1,43 +1,65 @@
 // ============================================================
-// SkillSetu — Crextio Design System Variables
-// Luminous Sunny Yellow / Deep Charcoal / Glassmorphic White
+// SkillSetu — Modern SaaS Design System Variables
+// SIH Finalist Reference Benchmark: Royal Indigo-Purple & Vibrant Metrics
 // ============================================================
 
-// Base Canvas & Light Tokens (Warm ivory cream matching Crextio canvas)
-$canvas-bg:          #FAF8F5;
-$cream-bg:           #FAF8F5;
-$card-white:         rgba(255, 255, 255, 0.96);
-$card-solid:         #FFFFFF;
-$warm-white:         #FFFFFF;
+// Brand Identity & Signature Gradients
+$brand-indigo:        #4f46e5;
+$brand-purple:        #4338ca;
+$brand-dark:          #1e1b4b;
+$gradient-primary:    linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+$gradient-hero:       linear-gradient(135deg, #4f46e5 0%, #4338ca 50%, #3730a3 100%);
+$gradient-subtle:     linear-gradient(135deg, rgba(79, 70, 229, 0.06) 0%, rgba(67, 56, 202, 0.06) 100%);
 
-// Soothing Honey Amber (Warm, eye-comfortable match to Crextio "Hired 10%" & Progress Rings)
-$gold:               #F5C748;
-$gold-light:         #FEEAA0;
-$gold-dark:          #E5B838;
-$gold-muted:         #FDF1C8;
-$gold-glow:          rgba(245, 199, 72, 0.22);
-$yellow-tag:         rgba(245, 199, 72, 0.16);
+// Base Canvas & Neutral Surfaces
+$canvas-bg:           #F8FAFC; // Clean slate-50
+$cream-bg:            #F8FAFC;
+$card-white:          #FFFFFF;
+$card-solid:          #FFFFFF;
+$warm-white:          #FFFFFF;
 
-// Deep Charcoal & Neutrals
-$charcoal:           #1C1C1E;
-$charcoal-deep:      #141416;
-$warm-gray:          #71717A;
-$muted:              #8E8E93;
-$warm-border:        rgba(0, 0, 0, 0.06);
-$warm-border-light:  rgba(255, 255, 255, 0.95);
+// Typography Colors
+$charcoal:            #1E293B; // Slate-800
+$charcoal-deep:       #0F172A; // Slate-900
+$text-main:           #1E293B;
+$text-muted:          #64748B; // Slate-500
+$text-subtle:         #94A3B8; // Slate-400
+$muted:               #64748B;
+$warm-gray:           #64748B;
 
-// Status Colors
-$status-met:         #22C55E;
-$status-developing:  #F7C93E;
-$status-gap:         #EF4444;
-$status-purple:      #A855F7;
-$status-blue:        #3B82F6;
+// Borders & Dividers
+$card-border:         #E2E8F0; // Slate-200
+$soft-border:         #E2E8F0;
+$warm-border:         #E2E8F0;
+$warm-border-light:   #F1F5F9;
 
-// Dark Contrast Cards (Attendance Report / Onboarding Task in Crextio)
-$dark-card-bg:       #212124;
-$dark-card-text:     #FFFFFF;
-$dark-card-muted:    #9E9EA7;
-$dark-card-border:   rgba(255, 255, 255, 0.08);
+// Vibrant Metric & Status Accents (From Benchmark Screenshots)
+$kpi-blue:            #2563EB; // Electric Blue: CGPA, Students
+$kpi-blue-light:      #EFF6FF;
+$kpi-green:           #10B981; // Emerald Green: Attendance, Verified
+$kpi-green-light:     #ECFDF5;
+$kpi-amber:           #F59E0B; // Amber: Moderate Risk, Gaps
+$kpi-amber-light:     #FFFBEB;
+$kpi-cyan:            #06B6D4; // Cyan: Semester, Placement
+$kpi-cyan-light:      #ECFEFF;
+$kpi-purple:          #8B5CF6; // Purple: Courses, Skills
+$kpi-purple-light:    #F5F3FF;
+$kpi-red:             #EF4444; // Ruby Red: High Risk, Logout
+$kpi-red-light:       #FEF2F2;
+
+// Legacy Aliases for seamless component compatibility
+$gold:                #F59E0B;
+$gold-light:          #FEF3C7;
+$gold-dark:           #4f46e5;
+$gold-muted:          #FFFBEB;
+$gold-glow:           rgba(245, 158, 11, 0.2);
+$yellow-tag:          rgba(245, 158, 11, 0.12);
+
+$status-met:          #10B981;
+$status-developing:   #F59E0B;
+$status-gap:          #EF4444;
+$status-purple:       #8B5CF6;
+$status-blue:         #2563EB;
 
 // Spacing Scale
 $space-1: 0.25rem;
@@ -49,45 +71,46 @@ $space-6: 1.5rem;
 $space-7: 2rem;
 $space-8: 3rem;
 
-// Soft Ambient Shadows & Elevation
-$shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.03);
-$shadow-soft:  0 8px 24px -4px rgba(0, 0, 0, 0.04);
-$shadow-card:  0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
-$shadow-hover: 0 16px 36px -6px rgba(0, 0, 0, 0.07), 0 2px 4px 0 rgba(0, 0, 0, 0.03);
+// Refined Shadows matching reference
+$shadow-sm:           0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-soft:         0 4px 20px -2px rgba(15, 23, 42, 0.06);
+$shadow-card:         0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+$shadow-hover:        0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+$shadow-dropdown:     0 12px 32px -4px rgba(15, 23, 42, 0.14);
 
-$transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+$transition-base:     180ms ease-in-out;
 
-// Border Radius — 28px for Bento Cards, 9999px for Pills
-$border-radius:       1.75rem; // 28px
-$border-radius-sm:    1rem;    // 16px
-$border-radius-lg:    2.25rem; // 36px
-$card-border-radius:  1.75rem; // 28px
-$btn-border-radius:   9999px;
+// Border Radii (16px clean cards, 10px buttons, 9999px pills)
+$border-radius:       1rem;    // 16px
+$border-radius-sm:    0.5rem;  // 8px
+$border-radius-lg:    1.25rem; // 20px
+$card-border-radius:  1rem;    // 16px
+$btn-border-radius:   0.625rem;// 10px
 
-// Bootstrap overrides — must precede the bootstrap import
-$primary:       $charcoal;
-$secondary:     $muted;
-$success:       $status-met;
-$warning:       $gold;
-$danger:        $status-gap;
-$info:          $status-blue;
-$light:         $canvas-bg;
-$dark:          $charcoal;
+// Bootstrap Overrides
+$primary:             $brand-indigo;
+$secondary:           $text-muted;
+$success:             $kpi-green;
+$warning:             $kpi-amber;
+$danger:              $kpi-red;
+$info:                $kpi-cyan;
+$light:               $canvas-bg;
+$dark:                $charcoal;
 
-$body-bg:       $canvas-bg;
-$body-color:    $charcoal;
-$border-color:  $warm-border;
+$body-bg:             $canvas-bg;
+$body-color:          $charcoal;
+$border-color:        $card-border;
 
 $font-family-sans-serif: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 $font-family-monospace:  "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 $headings-font-family:   "Plus Jakarta Sans", "Inter", sans-serif;
-$headings-font-weight:   500;
-$headings-color:         $charcoal;
+$headings-font-weight:   700;
+$headings-color:         $charcoal-deep;
 
-$enable-shadows:   false;
-$enable-gradients: false;
-$box-shadow:    $shadow-card;
-$box-shadow-sm: $shadow-sm;
+$enable-shadows:      false;
+$enable-gradients:    false;
+$box-shadow:          $shadow-card;
+$box-shadow-sm:       $shadow-sm;
 
-$link-color:       $charcoal;
-$link-hover-color: $gold-dark;
+$link-color:          $brand-indigo;
+$link-hover-color:    $brand-purple;

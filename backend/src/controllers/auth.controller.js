@@ -19,24 +19,25 @@ export async function register(req, res, next) {
     const passwordHash = await bcrypt.hash(value.password, 12);
 
     let institutionId;
-    if (["student", "academician"].includes(value.role) && value.institutionName) {
+    if (["student", "academician", "institution_admin"].includes(value.role) && value.institutionName?.trim()) {
       const institution = await Institution.findOneAndUpdate(
-        { name: value.institutionName },
-        { $setOnInsert: { name: value.institutionName } },
+        { name: value.institutionName.trim() },
+        { $setOnInsert: { name: value.institutionName.trim() } },
         { upsert: true, new: true }
       );
       institutionId = institution._id;
     }
 
     const user = await User.create({
-      name: value.name,
-      email: value.email,
+      name: value.name.trim(),
+      email: value.email.toLowerCase().trim(),
       passwordHash,
       role: value.role,
       institution: institutionId,
-      companyName: value.companyName,
-      bio: value.bio,
-      department: value.department,
+      institutionManaged: value.role === "institution_admin" ? institutionId : undefined,
+      companyName: value.companyName?.trim() || undefined,
+      bio: value.bio?.trim() || undefined,
+      department: value.department?.trim() || undefined,
     });
 
     const token = signToken(user);

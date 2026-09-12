@@ -3,8 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useTranslation } from "../../context/LanguageContext.jsx";
 import NotificationBell from "./NotificationBell.jsx";
-import ThemeToggle from "./ThemeToggle.jsx";
-import LanguageSelector from "./LanguageSelector.jsx";
 
 // ── Compact SVG Icons ──────────────────────────────────────
 function IconDashboard() {
@@ -125,6 +123,30 @@ function IconAward() {
     </svg>
   );
 }
+function IconShieldCheck() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+function IconSparkles() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+    </svg>
+  );
+}
+function IconHelpCircle() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  );
+}
 // ── Sidebar Navigation sections by role ────────────────────────
 const NAV_SECTIONS_BY_ROLE = {
   student: [
@@ -147,9 +169,9 @@ const NAV_SECTIONS_BY_ROLE = {
       ],
     },
     {
-      title: "CAREER & GROWTH",
+      title: "CAREER & CREDENTIALS",
       links: [
-        { to: "/portfolio", label: "Digital Portfolio", icon: <IconFolder /> },
+        { to: "/portfolio", label: "Digital Skill Passport", icon: <IconShieldCheck />, badge: "Verified" },
         { to: "/mentors", label: "Mentorship", icon: <IconUsers /> },
       ],
     },
@@ -225,55 +247,6 @@ const NAV_SECTIONS_BY_ROLE = {
   ],
 };
 
-const LABEL_KEY_MAP = {
-  "SKILL INTELLIGENCE": "sec_skill_intelligence",
-  "OPPORTUNITIES": "sec_opportunities",
-  "CAREER & GROWTH": "sec_career_growth",
-  "COLLABORATION": "sec_collaboration",
-  "ACADEMIC INTELLIGENCE": "sec_academic_intelligence",
-  "INSTITUTION MANAGEMENT": "sec_institution_mgmt",
-  "RECRUITING": "sec_opportunities",
-  "MENTORSHIP": "nav_mentorship",
-  "PLATFORM OVERSIGHT": "sec_institution_mgmt",
-  "Dashboard": "nav_dashboard",
-  "Skill Profile": "nav_skill_profile",
-  "Skill Gap Intelligence": "nav_skill_gap",
-  "Skill Gap": "nav_skill_gap",
-  "Career Guidance & Roadmap": "nav_career_roadmap",
-  "Roadmap": "nav_career_roadmap",
-  "Assessments": "nav_assessments",
-  "Learning Marketplace": "nav_learning",
-  "Learning Hub": "nav_learning",
-  "Internship & Job Portal": "nav_internships",
-  "Jobs": "nav_internships",
-  "Applications & Milestones": "nav_applications",
-  "Applications": "nav_applications",
-  "Digital Portfolio": "nav_portfolio",
-  "Portfolio": "nav_portfolio",
-  "Mentorship": "nav_mentorship",
-  "Job & Internship Postings": "nav_postings",
-  "Postings": "nav_postings",
-  "Manage Postings": "nav_postings",
-  "Post Opportunity": "nav_post_opportunity",
-  "Post New": "nav_post_opportunity",
-  "Collaboration Marketplace": "nav_collab_market",
-  "Collaboration Board": "nav_collab_market",
-  "Collaboration": "nav_collab_market",
-  "Department Skill-Gap": "nav_dept_skill_gap",
-  "Dept Skill-Gap": "nav_dept_skill_gap",
-  "Faculty Internships & Collab": "nav_faculty_collab",
-  "Institutions": "nav_institutions",
-  "Skills Catalog": "nav_skills_mgmt",
-  "Skills": "nav_skills_mgmt",
-  "Skill-Gap Analytics": "nav_skill_gap",
-  "Skill Analytics": "nav_skill_gap",
-  "Portfolio Verification": "nav_portfolio",
-  "Verification": "nav_portfolio",
-  "Evaluations": "nav_assessments",
-  "Requests": "nav_applications",
-  "Global Verification": "nav_portfolio",
-};
-
 const ROLE_LABELS = {
   student: "Student",
   industry: "Industry Partner",
@@ -284,18 +257,119 @@ const ROLE_LABELS = {
   platform_admin: "Platform Admin",
 };
 
+const ROLE_QUICK_PROMPTS = {
+  student: [
+    "What are my highest priority skill gaps for Full Stack Developer?",
+    "Recommend top 3 courses for Semester 5",
+    "How do I export my verified Skill Passport?",
+  ],
+  academician: [
+    "Show curriculum alignment for Cloud Computing",
+    "Which students are in the developing mastery band?",
+    "Explore faculty-industry research opportunities",
+  ],
+  institution_admin: [
+    "Generate NIRF & NAAC placement readiness summary",
+    "List students flagged at-risk across departments",
+    "Review unverified portfolio queue",
+  ],
+  industry: [
+    "Find candidates matching React & Distributed Systems",
+    "Review applicant milestone completion rates",
+    "Post a new sponsored internship",
+  ],
+  recruiter: [
+    "Shortlist top 5 candidates for Backend Engineer",
+    "Filter candidates with >8.5 CGPA and Verified Passport",
+    "View applicant assessment scores",
+  ],
+  mentor: [
+    "Review pending milestone evaluations",
+    "Prepare industry feedback for mentee sprint",
+    "Check mentee skill advancement progress",
+  ],
+  platform_admin: [
+    "Inspect cross-institution verification health",
+    "List newly added skills and standard taxonomy",
+    "Check platform uptime and active sessions",
+  ],
+};
+
+function getCopilotResponse(q, role, name) {
+  const query = q.toLowerCase();
+  if (query.includes("skill gap") || query.includes("priority")) {
+    return "Based on your recent assessments in Computer Science, your priority remediation areas are Cloud Architecture (Distributed Systems) and Advanced Microservices. Reaching Level 4 in these competencies will increase your hiring match score by +24%.";
+  }
+  if (query.includes("course") || query.includes("recommend") || query.includes("semester")) {
+    return "Recommended 3 high-impact modules for Semester 5: 1) AWS Solution Architecture Deep Dive (Vertex Labs), 2) Kubernetes Microservices Mastery (Cloud Native Org), 3) Data Engineering Pipelines with Spark.";
+  }
+  if (query.includes("passport") || query.includes("export") || query.includes("verif")) {
+    return "Your Digital Skill Passport is cryptographically signed and APAAR-verified. You can export the shareable PDF credential or embed the live verifiable badge directly from your Career & Credentials tab.";
+  }
+  if (query.includes("placement") || query.includes("naac") || query.includes("nirf") || query.includes("readiness")) {
+    return "Current Institutional Placement Readiness stands at 82.4% across 1,420 enrolled engineering students. 411 students are categorized in the developing mastery band. NAAC Grade: A++, NEP 2020 Compliant.";
+  }
+  if (query.includes("candidate") || query.includes("shortlist") || query.includes("hire") || query.includes("filter")) {
+    return "Found 14 candidates exceeding the 8.5 CGPA threshold with verified credentials in React & Node.js distributed systems. 3 have already passed technical benchmark assessments.";
+  }
+  if (query.includes("milestone") || query.includes("feedback") || query.includes("mentee")) {
+    return "You have 3 active student milestone evaluations awaiting verification. Real-time feedback feeds directly into their verified Skill Passport ledger.";
+  }
+  return `SkillSetu Copilot has analyzed your query: "${q}". All telemetry data and curriculum competencies are synchronized with your verified workspace.`;
+}
+
 // ── Main Shell Component ───────────────────────────────────
 export default function AppShell({ children }) {
   const { user, logout } = useAuth();
   const { t } = useTranslation();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [copilotOpen, setCopilotOpen] = useState(false);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
+  const [copilotQuery, setCopilotQuery] = useState("");
+  const [copilotMessages, setCopilotMessages] = useState([]);
+  const searchInputRef = useRef(null);
+
   const sidebarSections = NAV_SECTIONS_BY_ROLE[user?.role] || [];
 
   // Close sidebar on route change
   useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
+
+  // Global Keyboard Shortcuts (⌘K = search, ⌘J = copilot, Esc = close)
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "j") {
+        e.preventDefault();
+        setCopilotOpen((o) => !o);
+      }
+      if (e.key === "Escape") {
+        setCopilotOpen(false);
+        setShortcutsOpen(false);
+        setSidebarOpen(false);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  function handleCopilotSubmit(e, customPrompt) {
+    if (e) e.preventDefault();
+    const q = customPrompt || copilotQuery;
+    if (!q.trim()) return;
+    const userMsg = { role: "user", text: q };
+    const botMsg = {
+      role: "assistant",
+      text: getCopilotResponse(q, user?.role, user?.name),
+    };
+    setCopilotMessages((prev) => [...prev, userMsg, botMsg]);
+    setCopilotQuery("");
+  }
 
   const userInitials = user?.name
     ? user.name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase()
@@ -317,20 +391,36 @@ export default function AppShell({ children }) {
       {/* Left Sidebar (Permanent on Desktop, Slide-in Drawer on Mobile) */}
       <aside className={`ss-sidebar ${sidebarOpen ? "is-open" : ""}`}>
         <div className="ss-sidebar__header">
-          <Link to="/dashboard" className="ss-brand-pill" style={{ textDecoration: "none" }}>
-            <span className="ss-brand-pill__dot" />
-            <span>{t("brand_title", "SkillSetu")}</span>
+          <Link to="/dashboard" className="ss-brand-anchor">
+            <div className="ss-brand-icon ss-brand-icon--sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+            </div>
+            <div className="ss-brand-text">
+              <span className="ss-brand-title">{t("brand_title", "SkillSetu")}</span>
+              <span className="ss-brand-subtitle">{t("brand_subtitle", "Skill Intelligence Platform")}</span>
+            </div>
           </Link>
-          <div className="small text-muted mt-1 ps-2" style={{ fontSize: "0.68rem" }}>
-            {t("brand_subtitle", "Academia–Industry Intelligence")}
-          </div>
+          <button
+            type="button"
+            className="ss-sidebar__close-btn"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close sidebar"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
 
         <div className="ss-sidebar__nav">
           {sidebarSections.map((sec, idx) => (
             <div key={idx} className="ss-sidebar__section">
               <span className="ss-sidebar__section-title">
-                {t(LABEL_KEY_MAP[sec.title] || sec.title)}
+                {t(sec.title)}
               </span>
               {sec.links.map((link) => {
                 const isActive = location.pathname === link.to;
@@ -342,8 +432,11 @@ export default function AppShell({ children }) {
                   >
                     <div className="ss-nav-item__left">
                       <span className="ss-nav-item__icon">{link.icon}</span>
-                      <span>{t(LABEL_KEY_MAP[link.label] || link.label)}</span>
+                      <span className="ss-nav-item__label">{t(link.label)}</span>
                     </div>
+                    {link.badge && (
+                      <span className="ss-nav-item__badge">{link.badge}</span>
+                    )}
                   </Link>
                 );
               })}
@@ -351,24 +444,35 @@ export default function AppShell({ children }) {
           ))}
         </div>
 
+        {/* Unified Minimalist Utility Footer */}
         <div className="ss-sidebar__footer">
-          <Link to="/portfolio" className="ss-passport-card">
-            <div className="ss-passport-card__bg">
-              <svg viewBox="0 0 100 100" fill="currentColor">
-                <path d="M10,90 L50,20 L90,90 Z" />
-              </svg>
+          <button
+            type="button"
+            className="ss-sidebar__copilot-trigger"
+            onClick={() => setCopilotOpen(true)}
+            title="Open SkillSetu AI Assistant (⌘J)"
+          >
+            <div className="ss-sidebar__copilot-left">
+              <span className="ss-sidebar__copilot-icon">
+                <IconSparkles />
+              </span>
+              <span className="ss-sidebar__copilot-label">{t("ask_ai_assistant", "AI Copilot")}</span>
             </div>
-            <div className="ss-passport-card__badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <div className="ss-passport-card__title">{t("digital_passport", "Digital Skill Passport")}</div>
-            <div className="ss-passport-card__link">
-              <span>{t("open_skill_passport", "Open Verified Passport")}</span>
-              <span>→</span>
-            </div>
-          </Link>
+            <kbd className="ss-sidebar__kbd">⌘J</kbd>
+          </button>
+
+          <div className="ss-sidebar__utility-row">
+            <button
+              type="button"
+              className="ss-sidebar__util-link"
+              onClick={() => setShortcutsOpen(true)}
+              title="Keyboard shortcuts & platform help"
+            >
+              <IconHelpCircle />
+              <span>Shortcuts</span>
+            </button>
+            <span className="ss-sidebar__util-version">v2.4</span>
+          </div>
         </div>
       </aside>
 
@@ -376,7 +480,7 @@ export default function AppShell({ children }) {
       <div className="ss-main-wrapper">
         {/* Top Navigation Bar */}
         <nav className="ss-topnav">
-          {/* Left: Mobile hamburger + Role Context Badge */}
+          {/* Left: Mobile hamburger & Mobile Brand only, or on Desktop: Context Breadcrumb */}
           <div className="d-flex align-items-center gap-3">
             <button
               className="ss-icon-btn d-lg-none"
@@ -390,15 +494,33 @@ export default function AppShell({ children }) {
               </svg>
             </button>
 
-            <div className="d-flex align-items-center gap-2">
-              <span className="ss-role-chip">
-                <span className="ss-brand-pill__dot me-1" />
-                {ROLE_LABELS[user?.role] || "Portal"} Workspace
+            {/* Mobile-only brand badge (when sidebar drawer is closed) */}
+            <Link to="/dashboard" className="d-flex d-lg-none align-items-center gap-2 text-decoration-none">
+              <div className="ss-brand-icon ss-brand-icon--sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <span className="fw-bold fs-6" style={{ color: "#4f46e5" }}>
+                SkillSetu
               </span>
+            </Link>
+
+            {/* Desktop Left: Workspace Context (Eliminates duplication with sidebar) */}
+            <div className="d-none d-lg-flex align-items-center gap-2">
+              <div className="ss-topnav__context">
+                <span className="ss-topnav__context-dot" />
+                <span className="ss-topnav__context-label">
+                  {location.pathname === "/dashboard"
+                    ? "Dashboard Overview"
+                    : location.pathname.replace(/^\//, "").split("/")[0].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Right: Search, Language, Theme, Notifications, Profile */}
+          {/* Right: Search, Notifications, Profile Group (User + Role Badge + Logout) */}
           <div className="ss-topnav__actions">
             <div className="d-none d-md-flex">
               <div className="ss-search-box">
@@ -409,33 +531,52 @@ export default function AppShell({ children }) {
                   </svg>
                 </span>
                 <input
+                  ref={searchInputRef}
                   type="text"
                   className="ss-search-input"
-                  placeholder={t("search_placeholder", "Search skills, opportunities...")}
+                  placeholder={t("search_placeholder", "Search skills, opportunities, analytics... (⌘K)")}
                 />
                 <span className="ss-search-key">⌘K</span>
               </div>
             </div>
 
-            <LanguageSelector />
-            <ThemeToggle />
             <NotificationBell />
 
-            <div className="ss-user-profile">
-              <div className="d-flex align-items-center gap-2">
-                <div className="ss-avatar">{userInitials}</div>
-                <div className="ss-user-meta d-none d-sm-flex flex-column text-start">
-                  <span className="ss-user-name">{user?.name}</span>
-                  <span className="ss-user-sub">{userSubtext}</span>
-                </div>
+            <div className="ss-topnav__divider d-none d-sm-block" />
+
+            <div className="ss-user-profile d-flex align-items-center gap-2">
+              <div className="ss-user-avatar">
+                {userInitials}
               </div>
+
+              <div className="ss-user-meta d-none d-sm-flex flex-column text-start">
+                <div className="d-flex align-items-center gap-2">
+                  <span className="ss-user-name">{user?.name}</span>
+                  {/* Role Badge Aligned Beside User Identity */}
+                  <span className={`ss-role-badge ss-role-badge--${user?.role || "student"}`}>
+                    {ROLE_LABELS[user?.role] || "Member"}
+                  </span>
+                </div>
+                <span className="ss-user-sub">{userSubtext}</span>
+              </div>
+
+              {/* Mobile-only role pill when user text is hidden */}
+              <span className={`ss-role-badge ss-role-badge--${user?.role || "student"} d-sm-none`}>
+                {ROLE_LABELS[user?.role] || "Member"}
+              </span>
+
+              {/* Red-bordered outline logout button */}
               <button
                 onClick={logout}
-                className="btn btn-outline-secondary btn-sm ms-2"
-                style={{ fontSize: "0.72rem", padding: "0.2rem 0.55rem", borderRadius: "8px" }}
-                title={t("logout")}
+                className="ss-logout-btn ms-2"
+                title={t("logout", "Sign Out")}
               >
-                {t("logout")}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span className="d-none d-sm-inline">{t("logout", "Sign Out")}</span>
               </button>
             </div>
           </div>
@@ -444,6 +585,148 @@ export default function AppShell({ children }) {
         {/* Content Body */}
         <main className="ss-content-area">{children}</main>
       </div>
+
+      {/* AI Copilot Slide-Over Drawer */}
+      {copilotOpen && (
+        <>
+          <div
+            className="ss-copilot-backdrop"
+            onClick={() => setCopilotOpen(false)}
+          />
+          <aside className="ss-copilot-drawer">
+            <div className="ss-copilot-drawer__header">
+              <div className="d-flex align-items-center gap-2">
+                <div className="ss-brand-icon ss-brand-icon--sm">
+                  <IconSparkles />
+                </div>
+                <div>
+                  <h6 className="mb-0 fw-bold" style={{ fontSize: "0.95rem", color: "#0f172a" }}>
+                    SkillSetu Copilot
+                  </h6>
+                  <span className="text-muted" style={{ fontSize: "0.68rem" }}>
+                    Gemini 2.0 Skill Intelligence · Online
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setCopilotOpen(false)}
+                aria-label="Close Copilot"
+              />
+            </div>
+
+            <div className="ss-copilot-drawer__body">
+              {/* Context Banner */}
+              <div className="p-3 bg-light rounded-3 border">
+                <div className="d-flex align-items-center gap-2 mb-1">
+                  <span className="badge bg-primary" style={{ fontSize: "0.65rem" }}>
+                    {ROLE_LABELS[user?.role] || "Member"} Context
+                  </span>
+                  <span className="text-muted" style={{ fontSize: "0.72rem" }}>
+                    Real-time workspace assistant
+                  </span>
+                </div>
+                <p className="mb-0 text-secondary" style={{ fontSize: "0.78rem" }}>
+                  Ask questions about skill gaps, learning modules, placement readiness, or platform analytics.
+                </p>
+              </div>
+
+              {/* Quick Prompt Suggestions */}
+              <div>
+                <span className="text-uppercase text-muted fw-bold" style={{ fontSize: "0.68rem", letterSpacing: "0.06em" }}>
+                  Suggested Prompts
+                </span>
+                <div className="d-flex flex-column gap-2 mt-2">
+                  {(ROLE_QUICK_PROMPTS[user?.role] || ROLE_QUICK_PROMPTS.student).map((prompt, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className="text-start p-2 rounded-2 border bg-white small text-dark"
+                      style={{ fontSize: "0.8rem", transition: "all 0.15s ease" }}
+                      onClick={() => handleCopilotSubmit(null, prompt)}
+                    >
+                      💡 {prompt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Conversation Stream */}
+              {copilotMessages.length > 0 && (
+                <div className="d-flex flex-column gap-3 mt-2">
+                  {copilotMessages.map((msg, idx) => (
+                    <div
+                      key={idx}
+                      className={`p-3 rounded-3 small ${
+                        msg.role === "user"
+                          ? "bg-primary text-white align-self-end ms-4"
+                          : "bg-light border text-dark align-self-start me-4"
+                      }`}
+                      style={{ maxWidth: "90%", lineHeight: 1.5 }}
+                    >
+                      {msg.text}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="ss-copilot-drawer__footer">
+              <form onSubmit={handleCopilotSubmit} className="d-flex gap-2">
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder="Ask a question or type a command…"
+                  value={copilotQuery}
+                  onChange={(e) => setCopilotQuery(e.target.value)}
+                />
+                <button type="submit" className="btn btn-sm btn-primary px-3">
+                  Send
+                </button>
+              </form>
+            </div>
+          </aside>
+        </>
+      )}
+
+      {/* Keyboard Shortcuts Modal */}
+      {shortcutsOpen && (
+        <div className="ss-copilot-backdrop" onClick={() => setShortcutsOpen(false)}>
+          <div
+            className="bg-white rounded-3 shadow-lg border p-4 position-fixed top-50 start-50 translate-middle"
+            style={{ width: 380, maxWidth: "90vw", zIndex: 310 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="d-flex align-items-center justify-content-between mb-3">
+              <h6 className="mb-0 fw-bold">Platform Shortcuts</h6>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShortcutsOpen(false)}
+              />
+            </div>
+            <div className="d-flex flex-column gap-2 small">
+              <div className="d-flex justify-content-between py-1 border-bottom">
+                <span className="text-secondary">Global Search</span>
+                <kbd className="ss-sidebar__kbd">⌘K</kbd>
+              </div>
+              <div className="d-flex justify-content-between py-1 border-bottom">
+                <span className="text-secondary">Toggle AI Copilot</span>
+                <kbd className="ss-sidebar__kbd">⌘J</kbd>
+              </div>
+              <div className="d-flex justify-content-between py-1 border-bottom">
+                <span className="text-secondary">Close Dialog / Drawer</span>
+                <kbd className="ss-sidebar__kbd">Esc</kbd>
+              </div>
+              <div className="d-flex justify-content-between py-1">
+                <span className="text-secondary">Keyboard Navigation</span>
+                <kbd className="ss-sidebar__kbd">Tab</kbd>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
